@@ -510,7 +510,8 @@ button:hover,.action:hover,.pill:hover,.quick-card:hover{filter:brightness(1.12)
 @media(max-width:800px){.top-actions{gap:5px}.top-actions .tn-utility{padding:8px 10px;font-size:17px}.utility-label{display:none}.top-actions .action.primary{padding:8px 11px}.account-panel{align-items:flex-start;flex-wrap:wrap}.settings-row{padding:15px 0}}
 </style></head>
 <body><div class="shell">
-<header class="top"><div class="brand"><div class="brandmark">✦</div><div>TikNation<small>YOUR VOICE. YOUR WORLD.</small></div></div><div class="top-actions"><button class="pill tn-utility" aria-label="Messages" title="Messages" onclick="navigate('messages')">✉ <span class="utility-label">Messages</span></button><button class="pill tn-utility" aria-label="Notifications" title="Notifications" onclick="navigate('notifications')">♧ <span class="utility-label">Notifications</span></button><button class="action primary" onclick="navigate('create')">＋ Create</button></div></header>
+<header class="top"><div class="brand"><div class="brandmark">✦</div><div>TikNation<small>YOUR VOICE. YOUR WORLD.</small></div></div><div class="top-actions"><button class="pill tn-utility" aria-label="Messages" title="Messages" onclick="navigate('messages')">✉ <span class="utility-label">Messages</span></button><button class="pill tn-utility" aria-label="Notifications" title="Notifications" onclick="navigate('notifications')">♧ <span class="utility-label">Notifications</span></button><button class="pill tn-account" aria-label="Profile" title="Profile" onclick="navigate('profile')">◌ <span class="utility-label">Profile</span></button><button class="pill tn-account" aria-label="Settings" title="Settings" onclick="navigate('settings')">⚙ <span class="utility-label">Settings</span></button><button class="action primary" onclick="navigate('create')">＋ Create</button></div></header>
+<nav class="mobilebar" aria-label="Main navigation"><button data-view="home" onclick="navigate('home')"><span>⌂</span>Home</button><button data-view="discover" onclick="navigate('discover')"><span>⌕</span>Discover</button><button onclick="location.href='./live-worlds.html'"><span>◉</span>LIVE</button><a class="mobile-create" href="../next-rebuild/synthetic-camera-studio.html"><span>✧</span>Create</a><button data-view="community" onclick="navigate('community')"><span>◎</span>Community</button></nav>
 <div class="layout"><aside class="side" id="sideNav">
 <button class="navbtn active" data-view="home" onclick="navigate('home')"><b>⌂</b> Home</button><button class="navbtn" data-view="discover" onclick="navigate('discover')"><b>⌕</b> Discover</button><button class="navbtn" data-view="live" onclick="(window.location.href='./live-worlds.html')"><b>◉</b> Live Worlds</button><a class="navbtn" href="../next-rebuild/synthetic-camera-studio.html"><b>✧</b> Creation Portal</a><button class="navbtn" data-view="community" onclick="navigate('community')"><b>◎</b> Community</button><button class="navbtn" data-view="profile" onclick="navigate('profile')"><b>◌</b> Profile</button><a class="navbtn" href="../next-rebuild/safety-center.html"><b>🛡</b> Safety Center</a><a class="navbtn" href="../next-rebuild/child-safety-command-center.html"><b>⌘</b> Safety Command Center</a><div class="side-note">✨ <b style="color:white">A universe of creators.</b><br><br>Watch first. Follow if you want. Your next idea starts here.</div></aside>
 <main class="main">
@@ -622,7 +623,7 @@ function saveTikPreference(key,value){let p={};try{p=JSON.parse(localStorage.get
 function renderTikAccount(){const user=tikSession?.user||null;const name=tikProfile?.display_name||tikProfile?.username||user?.user_metadata?.display_name||"Your profile";const username=tikProfile?.username||user?.user_metadata?.username||"Dreamer";const set=(id,value)=>{const el=document.getElementById(id);if(el)el.textContent=value;};set("accountDisplayName",name);set("accountUsername","@"+username);set("accountEmail",user?.email||"Sign in to view your account details.");set("profileStatus",user?"Signed in. Your account identity is loaded from TikNation.":"You are viewing TikNation as a guest.");set("settingsAccountState",user?"Signed in as "+(user.email||username):"You are viewing TikNation as a guest.");const out=document.getElementById("settingsSignOut");if(out)out.hidden=!user;}
 
 loadTikSettings();
-</script><nav class="mobilebar" aria-label="Main navigation"><button data-view="home" onclick="navigate('home')"><span>⌂</span>Home</button><button data-view="discover" onclick="navigate('discover')"><span>⌕</span>Discover</button><button onclick="location.href='./live-worlds.html'"><span>◉</span>LIVE</button><a class="mobile-create" href="../next-rebuild/synthetic-camera-studio.html"><span>✧</span>Create</a><button data-view="profile" onclick="navigate('profile')"><span>◌</span>Profile</button></nav><style>
+</script><style>
 /* SINGLE NAVIGATION SYSTEM — desktop sidebar / mobile bottom bar */
 @media(min-width:801px){.mobilebar{display:none!important}}
 @media(max-width:800px){
@@ -673,7 +674,20 @@ loadTikSettings();
 @media(prefers-reduced-motion:reduce){.quick-card:after{display:none}.trust-action{transition:none}}
 
 
-/* FINAL MOBILE NAV OVERRIDE: hide the desktop sidebar on phones; use only the bottom bar. */
-@media(max-width:800px){#sideNav{display:none!important}}
-@media(min-width:801px){#sideNav{display:grid!important}.mobilebar{display:none!important}}
+/* MOBILE NAV REWORK: profile/settings in the top bar; primary navigation stays below it. */
+@media(max-width:800px){
+ #sideNav{display:none!important}
+ .top-actions .tn-utility,.top-actions .action.primary{display:none!important}
+ .top-actions .tn-account{display:inline-flex!important;align-items:center;justify-content:center;padding:8px 10px;font-size:17px}
+ .top-actions{gap:6px}
+ .mobilebar{display:flex!important;position:sticky!important;top:66px!important;bottom:auto!important;left:auto!important;right:auto!important;width:calc(100% + 28px);margin:0 -14px;justify-content:space-around;gap:2px;padding:8px 5px;background:#080616f5;backdrop-filter:blur(18px);border-top:0;border-bottom:1px solid #8c83ff44;box-shadow:0 10px 24px #05040e55;z-index:15}
+ .mobilebar button,.mobilebar .mobile-create{flex:1;min-width:0;border:0;background:none;color:var(--muted);font-size:clamp(8px,2.3vw,10px);display:grid;gap:3px;justify-items:center;align-content:center;padding:3px 0;text-decoration:none;white-space:nowrap}
+ .mobilebar button span,.mobilebar .mobile-create span{font-size:20px;line-height:1.2}
+ .mobilebar button.active,.mobilebar .mobile-create{color:var(--cyan)}
+ .mobilebar .mobile-create{font-weight:800}
+ .shell{padding-bottom:40px}
+}
+@media(min-width:801px){#sideNav{display:grid!important}.mobilebar{display:none!important}.top-actions .tn-account{display:inline-flex;align-items:center}}
+@media(prefers-reduced-motion:reduce){.mobilebar{scroll-behavior:auto}}
+
 </style>
