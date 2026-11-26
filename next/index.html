@@ -672,4 +672,8 @@ loadTikSettings();
 @media(max-width:600px){.home-trust-panel{align-items:flex-start;flex-wrap:wrap;padding:17px}.trust-copy{flex:1 1 calc(100% - 75px)}.trust-action{width:100%;text-align:center}.trust-copy p{font-size:12px}}
 @media(prefers-reduced-motion:reduce){.quick-card:after{display:none}.trust-action{transition:none}}
 
+
+/* FINAL MOBILE NAV OVERRIDE: hide the desktop sidebar on phones; use only the bottom bar. */
+@media(max-width:800px){#sideNav{display:none!important}}
+@media(min-width:801px){#sideNav{display:grid!important}.mobilebar{display:none!important}}
 </style>
