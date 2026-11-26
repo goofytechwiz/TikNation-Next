@@ -1,0 +1,31 @@
+/* TikNation Enchanted Marks — display layer only. Award decisions must come from trusted server data. */
+.tn-badge{display:inline-flex;align-items:center;gap:5px;vertical-align:middle;position:relative;isolation:isolate;margin-left:5px;cursor:help}
+.tn-badge__icon{width:22px;height:22px;display:block;filter:drop-shadow(0 0 5px var(--tn-glow));animation:tn-badge-breathe 3.8s ease-in-out infinite}
+.tn-badge--founder .tn-badge__icon{width:25px;height:25px;animation:tn-badge-crown 3.2s ease-in-out infinite}
+.tn-badge--official{--tn-glow:#b18aff}
+.tn-badge--verified-creator{--tn-glow:#68e9ff}
+.tn-badge--founder{--tn-glow:#ffd477}
+.tn-badge--recognition{--tn-glow:#ff8bd3}
+.tn-badge__label{position:absolute;left:50%;bottom:calc(100% + 8px);transform:translate(-50%,4px);padding:6px 9px;border:1px solid #ffffff35;border-radius:9px;background:#17102c;color:#fff;font:700 10px/1.2 "DM Sans",sans-serif;white-space:nowrap;opacity:0;pointer-events:none;transition:opacity .18s,transform .18s;box-shadow:0 6px 20px #0008}
+.tn-badge:hover .tn-badge__label,.tn-badge:focus-visible .tn-badge__label{opacity:1;transform:translate(-50%,0)}
+.tn-badge:focus-visible{outline:2px solid #8ef7ef;outline-offset:3px;border-radius:50%}
+.tn-badge-preview{display:flex;flex-wrap:wrap;align-items:center;gap:15px;margin:14px 0;padding:15px;border:1px solid #ffffff20;border-radius:16px;background:linear-gradient(120deg,#ffffff0a,#a879ff12)}
+.tn-badge-preview__item{display:flex;align-items:center;gap:7px;color:#e9e0fa;font-size:11px;font-weight:700}
+.tn-badge-preview .tn-badge{margin:0}
+@keyframes tn-badge-breathe{0%,100%{filter:drop-shadow(0 0 3px var(--tn-glow));transform:scale(1)}50%{filter:drop-shadow(0 0 9px var(--tn-glow));transform:scale(1.06)}}
+@keyframes tn-badge-crown{0%,100%{filter:drop-shadow(0 0 4px #ffd477);transform:translateY(0)}50%{filter:drop-shadow(0 0 12px #ffe7a0);transform:translateY(-1px) scale(1.07)}}
+@media(prefers-reduced-motion:reduce){.tn-badge__icon{animation:none!important}.tn-badge__label{transition:none!important}}
+
+/* Beta Pioneer — a permanent pre-launch participation mark. */
+.tn-badge--beta-pioneer{--tn-glow:#8f83ff}
+.tn-badge--beta-pioneer .tn-badge__icon{width:25px;height:25px;filter:drop-shadow(0 0 6px #64f3ff) drop-shadow(0 0 9px #9b72ff);animation:tn-pioneer-portal 3.4s ease-in-out infinite}
+.tn-badge--beta-pioneer .tn-badge__label{border-color:#8b7aff88;background:linear-gradient(120deg,#111b39,#241447);box-shadow:0 0 18px #7b67ff55,0 6px 20px #0008}
+@keyframes tn-pioneer-portal{0%,100%{filter:drop-shadow(0 0 4px #64f3ff) drop-shadow(0 0 6px #9b72ff);transform:rotate(-2deg) scale(1)}50%{filter:drop-shadow(0 0 10px #64f3ff) drop-shadow(0 0 14px #b58aff) drop-shadow(0 0 4px #ffd77a);transform:rotate(2deg) scale(1.09)}}
+@media(prefers-reduced-motion:reduce){.tn-badge--beta-pioneer .tn-badge__icon{animation:none!important}}
+
+/* Iconic Verified — public figure identity mark. */
+.tn-badge--iconic-verified{--tn-glow:#c49aff}
+.tn-badge--iconic-verified .tn-badge__icon{width:25px;height:25px;filter:drop-shadow(0 0 6px #c49aff) drop-shadow(0 0 10px #8b70ff);animation:tn-iconic-prism 3.1s ease-in-out infinite}
+.tn-badge--iconic-verified .tn-badge__label{border-color:#c49aff99;background:linear-gradient(120deg,#17132f,#38215e);box-shadow:0 0 20px #9d70ff55,0 6px 20px #0008}
+@keyframes tn-iconic-prism{0%,100%{filter:drop-shadow(0 0 4px #c49aff) drop-shadow(0 0 7px #8b70ff);transform:rotate(-2deg) scale(1)}50%{filter:drop-shadow(0 0 11px #e6d2ff) drop-shadow(0 0 16px #9d70ff);transform:rotate(2deg) scale(1.09)}}
+@media(prefers-reduced-motion:reduce){.tn-badge--iconic-verified .tn-badge__icon{animation:none!important}}
