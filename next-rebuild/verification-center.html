@@ -1,0 +1,203 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#100b25">
+<title>TikNation · Verification Realm</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{color-scheme:dark;--ink:#f8f5ff;--muted:#b8afcf;--cyan:#75f2f0;--violet:#b18aff;--pink:#ff82c7;--gold:#ffd477;--line:#ffffff24}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;min-height:100vh;color:var(--ink);font:15px/1.5 "DM Sans",sans-serif;background:radial-gradient(ellipse at 7% 0,#164362 0,transparent 34%),radial-gradient(ellipse at 95% 15%,#54245e 0,transparent 35%),radial-gradient(ellipse at 60% 100%,#30205b 0,transparent 38%),#100b25}
+button,input,textarea,select{font:inherit}button{cursor:pointer;color:inherit}a{color:inherit;text-decoration:none}button:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible,a:focus-visible{outline:2px solid var(--cyan);outline-offset:3px}
+.ambient{position:fixed;inset:0;pointer-events:none;overflow:hidden;z-index:-1}.orb{position:absolute;border-radius:50%;filter:blur(75px);opacity:.18;animation:drift 17s ease-in-out infinite alternate}.orb.one{width:35vw;height:35vw;background:#36e5ed;left:-14%;top:20%}.orb.two{width:42vw;height:42vw;background:#9b55ff;right:-20%;top:0;animation-delay:-6s}.orb.three{width:30vw;height:30vw;background:#ff61b9;bottom:-18%;left:38%;animation-delay:-11s}@keyframes drift{to{transform:translate(7vw,-4vh) scale(1.2)}}
+header{max-width:1160px;margin:auto;padding:20px 26px;display:flex;align-items:center;justify-content:space-between;gap:15px}.brand{display:flex;align-items:center;gap:10px;font:700 20px "Space Grotesk"}.brandmark{width:39px;height:39px;border-radius:14px;display:grid;place-items:center;color:#25143c;background:linear-gradient(145deg,var(--cyan),var(--violet),var(--pink));box-shadow:0 0 28px #8a7aff66;font-size:23px}.brand span span{color:var(--pink)}.back{color:#c7bce0;font-size:12px;border:1px solid var(--line);border-radius:11px;padding:9px 13px;background:#ffffff08}
+main{max-width:1000px;margin:18px auto 80px;padding:0 24px}.intro{text-align:center;padding:26px 10px 25px}.eyebrow{font-size:10px;letter-spacing:3px;font-weight:900;color:var(--cyan)}h1{font:700 clamp(35px,7vw,62px)/1.02 "Space Grotesk";letter-spacing:-2.5px;margin:13px 0 12px}.gradient{background:linear-gradient(90deg,var(--cyan),#c2a2ff,var(--pink),var(--gold));background-clip:text;color:transparent}.intro p{max-width:650px;margin:0 auto;color:#c8bfd9;line-height:1.7}
+.portal{position:relative;max-width:900px;margin:12px auto 0;padding:26px;border:1px solid #b995ff55;border-radius:28px;background:linear-gradient(145deg,#162a45eF,#21153bee 58%,#361b43ee);box-shadow:0 24px 75px #05020d88,inset 0 0 65px #ffffff08;overflow:hidden}.portal:before{content:"";position:absolute;inset:-2px;pointer-events:none;background:radial-gradient(circle at 8% 0,#69f6ed22,transparent 30%),radial-gradient(circle at 95% 90%,#ff72bd22,transparent 34%)}
+.portal-head{position:relative;display:flex;justify-content:space-between;align-items:center;gap:16px;margin-bottom:22px}.portal-head h2{font:700 22px "Space Grotesk";margin:0}.portal-head p{margin:4px 0 0;color:var(--muted);font-size:12px}.seal{width:68px;height:68px;flex:none;border-radius:50%;display:grid;place-items:center;font-size:30px;color:#fff;background:radial-gradient(circle,#35245b 42%,#172e48 43%);border:1px solid #8af7f0aa;box-shadow:0 0 0 6px #76f3f022,0 0 30px #9d7dff66;animation:sealglow 4s ease-in-out infinite alternate}@keyframes sealglow{to{box-shadow:0 0 0 10px #ff7acb13,0 0 42px #6cf3f099;transform:rotate(8deg)}}
+.path-choice{position:relative;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin:22px 0}.path{border:1px solid #ffffff27;border-radius:20px;padding:21px;background:linear-gradient(145deg,#ffffff0d,#ffffff04);text-align:left;transition:.25s;min-height:165px}.path:hover{transform:translateY(-4px);border-color:#8ef7f0aa;box-shadow:0 12px 32px #2bd8e522}.path.selected{border-color:#86f5f1;box-shadow:inset 0 0 0 1px #86f5f1,0 0 28px #68e7ee2b;background:linear-gradient(145deg,#15506a77,#56316b66)}.path.business.selected{border-color:#c6a5ff;box-shadow:inset 0 0 0 1px #c6a5ff,0 0 28px #a16dff33}.path.public-figure .mini{color:#e3c4ff}.path.public-figure.selected{border-color:#d8a7ff;box-shadow:inset 0 0 0 1px #d8a7ff,0 0 30px #a66bff55;background:linear-gradient(145deg,#49256b88,#261b4c88)}.path .symbol{font-size:28px;display:block;margin-bottom:8px}.path b{font:700 17px "Space Grotesk";display:block}.path small{display:block;color:#c2bad4;margin-top:6px;line-height:1.5}.path .mini{display:inline-block;margin-top:12px;font-size:9px;letter-spacing:1.5px;color:var(--cyan);font-weight:900}.path.business .mini{color:#d0baff}
+.progress-wrap{position:relative;margin:24px 0 22px}.progress-meta{display:flex;justify-content:space-between;color:#aaa0c0;font-size:11px;margin-bottom:10px}.progress-track{height:6px;border-radius:99px;background:#ffffff16;overflow:hidden}.progress-fill{height:100%;width:25%;border-radius:99px;background:linear-gradient(90deg,var(--cyan),var(--violet),var(--pink));box-shadow:0 0 14px #8ceef0;transition:width .35s}
+.steps{display:flex;gap:8px;position:relative;margin-bottom:24px}.stepdot{flex:1;display:flex;align-items:center;gap:7px;color:#8f86a6;font-size:10px;font-weight:800}.stepdot i{width:25px;height:25px;border:1px solid #ffffff35;border-radius:50%;display:grid;place-items:center;font-style:normal;font-size:11px;flex:none}.stepdot.active{color:#fff}.stepdot.active i,.stepdot.done i{background:linear-gradient(135deg,#62e9e5,#a786ff);color:#1b1231;border-color:transparent;box-shadow:0 0 16px #70e9e777}.stepdot.done{color:#b9f8f2}
+.stage{position:relative;display:none;animation:arrive .28s ease}.stage.active{display:block}@keyframes arrive{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}.stage h3{font:700 23px "Space Grotesk";margin:0 0 6px}.stage .hint{color:#b9b0cc;font-size:12px;margin:0 0 20px}.fields{display:grid;grid-template-columns:1fr 1fr;gap:15px}.field{display:grid;gap:7px}.field.full{grid-column:1/-1}.field label{font-size:11px;font-weight:800;color:#e9e2f5}.field small{font-size:10px;color:#9f95b5}.field input,.field textarea,.field select{width:100%;border:1px solid #ffffff2d;background:#100d25cc;color:#fff;border-radius:13px;padding:13px 14px;outline:none}.field textarea{min-height:105px;resize:vertical}.field input:focus,.field textarea:focus,.field select:focus{border-color:var(--cyan);box-shadow:0 0 0 3px #72f2f01b}.field input::placeholder,.field textarea::placeholder{color:#766c8e}
+.info{border:1px solid #7be9e744;background:#4dd5e00d;border-radius:14px;padding:13px 15px;color:#c9e9eb;font-size:11px;line-height:1.6;margin-top:17px}.info b{color:#9df7f1}.privacy{border-color:#ffd47755;background:#6b4c1b1c;color:#f1dba9}.review-grid{display:grid;grid-template-columns:1fr 1fr;gap:11px}.review-item{padding:14px;border:1px solid #ffffff20;border-radius:14px;background:#ffffff08;min-width:0}.review-item small{display:block;color:#a99fbe;font-size:9px;letter-spacing:1.2px;text-transform:uppercase;margin-bottom:5px}.review-item strong{font-size:13px;overflow-wrap:anywhere;white-space:pre-wrap}.review-item.wide{grid-column:1/-1}
+.actions{position:relative;display:flex;justify-content:space-between;gap:10px;margin-top:25px}.btn{border:1px solid transparent;border-radius:13px;padding:12px 18px;font-size:12px;font-weight:900;transition:.2s}.btn.primary{color:#25153b;background:linear-gradient(100deg,var(--cyan),#bba1ff 58%,var(--pink));box-shadow:0 8px 25px #9b70ff3b}.btn.primary:hover{transform:translateY(-2px);box-shadow:0 12px 30px #9b70ff66}.btn.secondary{border-color:#ffffff30;background:#ffffff0b;color:#e7e0f3}.btn:disabled{opacity:.45;cursor:not-allowed;transform:none}.statusline{min-height:24px;margin:12px 0 0;font-size:12px;color:#aaf3d5}.statusline.error{color:#ffabbc}
+.hidden{display:none!important}.dashboard{position:relative;margin-top:24px}.dash-head{display:flex;justify-content:space-between;align-items:center;gap:12px;margin:0 0 13px}.dash-head h2{font:700 22px "Space Grotesk";margin:0}.application{border:1px solid #ffffff22;border-radius:16px;padding:15px;margin:10px 0;background:#ffffff08}.application-top{display:flex;justify-content:space-between;gap:12px;align-items:center}.application small{color:#a99fbe;font-size:10px}.pill{border:1px solid #ffffff35;border-radius:99px;padding:5px 10px;font-size:9px;font-weight:900;letter-spacing:.7px;text-transform:uppercase}.pill.pending,.pill.under_review{color:#ffe3a3;border-color:#ffd47766}.pill.verified{color:#8ff8f2;border-color:#7bf4e777}.pill.rejected{color:#ffabc9;border-color:#ff83b566}.pill.needs_information{color:#d4b7ff;border-color:#b18aff77}.application p{color:#d4cde2;font-size:12px;margin:8px 0 0;line-height:1.55}
+.admin-card{margin-top:25px;border:1px solid #ffd47755;border-radius:18px;padding:18px;background:linear-gradient(145deg,#392a3c88,#171329cc)}.admin-card h3{font:700 18px "Space Grotesk";margin:0}.admin-card>p{color:#c9bad2;font-size:11px}.admin-review{border-top:1px solid #ffffff19;padding:14px 0}.admin-review:first-child{border-top:0}.admin-review textarea{width:100%;min-height:65px;background:#100d25;color:white;border:1px solid #ffffff2b;border-radius:10px;padding:10px;margin:8px 0}.admin-review select{background:#100d25;color:white;border:1px solid #ffffff30;border-radius:10px;padding:9px}.admin-review .review-controls{display:flex;gap:9px;flex-wrap:wrap;align-items:center}.empty{padding:20px;text-align:center;color:#a99fbe;border:1px dashed #ffffff30;border-radius:15px;font-size:12px}
+footer{max-width:900px;margin:24px auto 0;text-align:center;color:#827995;font-size:10px;padding:0 20px}
+@media(max-width:820px){.path-choice{grid-template-columns:1fr}}\n@media(max-width:650px){header{padding:15px 16px}main{padding:0 13px;margin-top:8px}.portal{padding:17px;border-radius:22px}.path-choice{grid-template-columns:1fr}.path{min-height:0;padding:17px}.fields{grid-template-columns:1fr}.field.full{grid-column:auto}.steps{gap:4px}.stepdot{justify-content:center}.stepdot span{display:none}.review-grid{grid-template-columns:1fr}.review-item.wide{grid-column:auto}.portal-head h2{font-size:19px}.seal{width:54px;height:54px;font-size:24px}.intro{padding-top:18px}.intro p{font-size:13px}.actions .btn{padding:12px 13px}.dash-head{align-items:flex-start;flex-direction:column}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+<div class="ambient" aria-hidden="true"><i class="orb one"></i><i class="orb two"></i><i class="orb three"></i></div>
+<header><a class="brand" href="index.html"><span class="brandmark">✦</span><span>Tik<span>Nation</span></span></a><a class="back" href="index.html">← Back to your world</a></header>
+<main>
+<section class="intro"><div class="eyebrow">✦ THE TIKNATION VERIFICATION REALM ✦</div><h1>Your identity.<br><span class="gradient">Your story. Your mark.</span></h1><p>Step into a different kind of verification experience. Tell us who you are, show us the world you've built, and let our team review your application privately.</p><p><a href="child-safety-advocates.html" style="color:#8ef7f0;font-weight:800">✦ Applying as a Child Safety Advocate? Open the separate designation application ↗</a></p></section>
+<section class="portal" aria-label="Verification application portal">
+<div class="portal-head"><div><div class="eyebrow">A PLACE FOR AUTHENTIC VOICES</div><h2 id="portalTitle">Choose your path</h2><p id="portalSubtitle">Two paths. One promise: authenticity.</p></div><div class="seal" aria-hidden="true">✧</div></div>
+<div id="choiceView">
+<div class="path-choice">
+<button class="path selected" id="individualPath" type="button" aria-pressed="true"><span class="symbol">✦</span><b>Individual Creator</b><small>For creators, artists, musicians, streamers, public figures and people building a recognizable presence.</small><span class="mini">THE VERIFIED CREATOR MARK</span></button>
+<button class="path business" id="businessPath" type="button" aria-pressed="false"><span class="symbol">◈</span><b>Business & Organization</b><small>For companies, brands, nonprofits, teams and organizations representing an official presence.</small><span class="mini">THE OFFICIAL ORGANIZATION MARK</span></button>
+<button class="path public-figure" id="publicFigurePath" type="button" aria-pressed="false"><span class="symbol">✧</span><b>Public Figure & Celebrity</b><small>For recognized entertainers, musicians, actors, athletes and public personalities—or their authorized representatives.</small><span class="mini">THE ICONIC VERIFIED MARK</span></button>
+</div>
+<div class="statusline" id="entryStatus" role="status" aria-live="polite"></div><div class="info"><b>Choose the path that matches the account.</b> A business can apply even if it is a small independent operation or does not have formal incorporation papers. Public figures may apply directly or respond to a private TikNation invitation. An invitation never skips identity checks or guarantees a badge.</div>
+<div class="actions"><span></span><button class="btn primary" id="beginBtn">Enter the journey ✦</button></div>
+</div>
+<div id="wizard" class="hidden">
+<div class="progress-wrap"><div class="progress-meta"><span id="progressLabel">STAGE 1 OF 4</span><span id="progressPercent">25%</span></div><div class="progress-track"><div class="progress-fill" id="progressFill"></div></div></div>
+<div class="steps" aria-label="Application progress"><div class="stepdot active" data-dot="0"><i>1</i><span>Your identity</span></div><div class="stepdot" data-dot="1"><i>2</i><span>Your presence</span></div><div class="stepdot" data-dot="2"><i>3</i><span>Your story</span></div><div class="stepdot" data-dot="3"><i>4</i><span>Final review</span></div></div>
+<form id="applicationForm" novalidate>
+<section class="stage active" data-stage="0"><h3 id="identityHeading">Who are you?</h3><p class="hint" id="identityHint">Let's connect your real-world identity to your TikNation presence.</p><div class="fields">
+<div class="field"><label for="username">TikNation username *</label><input id="username" maxlength="24" placeholder="@yourusername" required autocomplete="nickname"><small>Your existing TikNation account name.</small></div>
+<div class="field"><label for="entityName" id="entityLabel">Creator / public name</label><input id="entityName" maxlength="120" placeholder="The name people know you by"><small id="entityHelp">Use the public name that matches your creator identity.</small></div>
+<div class="field full hidden" id="representativeField"><label for="representativeRole">Who is completing this application? *</label><select id="representativeRole"><option value="self">I am the public figure</option><option value="authorized_representative">I am an authorized representative / manager</option></select><small>Representatives must be authorized to act for the public figure.</small></div>
+<div class="field full hidden" id="representativeNameField"><label for="representativeName">Representative full name *</label><input id="representativeName" maxlength="120" placeholder="Your name as the authorized representative"><small>This is private to the application review.</small></div>
+<div class="field full"><label for="category" id="categoryLabel">What best describes you? *</label><select id="category" required><option value="">Choose a category</option><option>Artist / Designer</option><option>Musician / Performer</option><option>Streamer / Live Creator</option><option>Video Creator</option><option>Public Figure</option><option>Writer / Educator</option><option>Other Creator</option></select></div>
+</div></section>
+<section class="stage" data-stage="1"><h3>Show us your presence</h3><p class="hint">Help us find the official places where people can recognize you or your organization.</p><div class="fields">
+<div class="field full"><label for="presence">Your TikNation profile or official website *</label><input id="presence" maxlength="500" placeholder="https://... or @yourusername" required><small>One clear primary link is enough to start.</small></div>
+<div class="field full"><label for="supportingLinks">Other public links (optional)</label><textarea id="supportingLinks" maxlength="2000" placeholder="Add public social profiles, press coverage, portfolios, business listings or official pages. One link per line."></textarea><small>Public links help reviewers confirm consistency. Do not paste passwords or private access links.</small></div>
+</div><div class="info"><b>Evidence can be flexible.</b> Independent creators and smaller businesses may use a portfolio, established social profile, public listing, press mention or other credible public presence.</div></section>
+<section class="stage" data-stage="2"><h3 id="storyHeading">Tell us your story</h3><p class="hint" id="storyHint">What should people know about the person behind this account?</p><div class="fields">
+<div class="field full"><label for="reason" id="reasonLabel">Why should this account be verified? *</label><textarea id="reason" maxlength="2000" required placeholder="Tell us what you create, who you are, and what makes your public identity recognizable."></textarea><small>Be clear and genuine. There is no follower-count requirement in this application experience.</small></div>
+<div class="field full hidden" id="businessEmailField"><label for="contactEmail" id="contactEmailLabel">Official contact email (optional)</label><input id="contactEmail" type="email" maxlength="254" placeholder="hello@yourbusiness.com"><small>This is private to the application review and is not shown on your public profile.</small></div>
+</div><div class="info privacy"><b>Your privacy matters.</b> Do not upload or paste government ID numbers, passwords, financial details or sensitive documents here. If additional proof is genuinely needed, TikNation must request it through a secure private process.</div></section>
+<section class="stage" data-stage="3"><h3>Review your application</h3><p class="hint">Take a final look. Your application stays private and is visible only to you and authorized reviewers.</p><div class="review-grid" id="reviewGrid"></div><label style="display:flex;gap:10px;align-items:flex-start;margin-top:17px;color:#d9d1e8;font-size:11px"><input type="checkbox" id="confirmAccuracy" style="accent-color:#83f1ee;margin-top:2px"> I confirm that the information is accurate and that I am authorized to represent this individual or organization.</label><div class="info privacy">Submitting does not guarantee approval. Verification is free. No one at TikNation should ask you to pay for a badge.</div></section>
+<div class="actions"><button class="btn secondary" id="backBtn" type="button">← Back</button><button class="btn primary" id="nextBtn" type="button">Continue →</button><button class="btn primary hidden" id="submitBtn" type="submit">Send to the Realm ✦</button></div>
+<div class="statusline" id="formStatus" role="status" aria-live="polite"></div>
+</form>
+</div>
+<div id="successView" class="hidden" style="position:relative;text-align:center;padding:34px 10px"><div class="seal" style="margin:0 auto 20px">✦</div><div class="eyebrow">TRANSMISSION RECEIVED</div><h2 style="font:700 30px 'Space Grotesk';margin:10px 0">Your story has entered<br><span class="gradient">the Verification Realm.</span></h2><p style="color:#c9bfd9;font-size:13px">Your application is safely recorded. You can return here to follow its progress.</p><div id="referenceCode" style="display:inline-block;padding:10px 15px;border:1px solid #7cece977;border-radius:12px;margin:12px 0;color:#a5fbf4;font:700 13px monospace"></div><div><button class="btn primary" id="viewApplicationsBtn">View my applications</button></div></div>
+</section>
+<section class="dashboard hidden" id="myDashboard"><div class="dash-head"><h2>✧ Your application constellation</h2><button class="btn secondary" id="newApplicationBtn">Start another application</button></div><div id="myApplications"><div class="empty">Your submitted applications will appear here.</div></div></section>
+<section class="admin-card hidden" id="founderPanel"><div class="eyebrow">FOUNDER-ONLY REVIEW CHAMBER</div><h3>Verification review queue</h3><p>Visible only to the Founder after two-step verification. Database authorization is checked again for every review decision.</p><div id="reviewQueue"><div class="empty">Loading review queue…</div></div></section>
+<footer>✦ TikNation Verification Realm · Authenticity, not popularity · Reduced-motion settings respected</footer>
+</main>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.119.2"></script>
+<script>
+(async()=>{
+"use strict";
+const $=id=>document.getElementById(id);
+const db=window.supabase.createClient("https://mekzfezaefcimxncklfj.supabase.co","sb_publishable_Cr0ssF3pEz5lE08KwvyacQ_dKC2IUbQ");
+const FOUNDER_EMAIL="tiknationstudio@gmail.com";
+let session=null, user=null, type="individual", stage=0, isFounder=false, latestApps=[];
+const status=(message,error=false)=>{const el=$("formStatus");el.textContent=message;el.className="statusline"+(error?" error":"");};
+const clean=s=>(s||"").trim();
+const safe=s=>String(s??"").replace(/[&<>"']/g,ch=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[ch]));
+const niceStatus=s=>({pending:"Submitted",under_review:"Under review",needs_information:"More information needed",verified:"Approved",rejected:"Not approved"}[s]||s);
+const dateLabel=s=>new Date(s).toLocaleDateString(undefined,{year:"numeric",month:"short",day:"numeric"});
+function selectType(t){type=t;for(const [id,value] of [["individualPath","individual"],["businessPath","business"],["publicFigurePath","public_figure"]]){$(id).classList.toggle("selected",t===value);$(id).setAttribute("aria-pressed",String(t===value));}}
+$("individualPath").addEventListener("click",()=>selectType("individual"));
+$("businessPath").addEventListener("click",()=>selectType("business"));
+$("publicFigurePath").addEventListener("click",()=>selectType("public_figure"));
+$("representativeRole").addEventListener("change",()=>{$("representativeNameField").classList.toggle("hidden",type!=="public_figure"||$("representativeRole").value!=="authorized_representative");});
+function updateTypeCopy(){
+ const business=type==="business", publicFigure=type==="public_figure";
+ $("identityHeading").textContent=business?"What organization are you representing?":publicFigure?"Who is the public figure?":"Who are you?";
+ $("identityHint").textContent=business?"Connect your official organization name to the TikNation account representing it.":publicFigure?"Connect the recognized public identity to the TikNation account. The account owner or an authorized representative can apply.":"Connect your public identity to the TikNation account representing you.";
+ $("entityLabel").textContent=business?"Official business / organization name *":publicFigure?"Public figure's professional / public name *":"Creator / public name";
+ $("entityHelp").textContent=business?"Use the name customers, members or the public recognize.":publicFigure?"Use the name audiences recognize from official work and public sources.":"Use the public name that matches your creator identity.";
+ $("entityName").placeholder=business?"Official organization name":publicFigure?"Public figure's professional name":"The name people know you by";
+ $("entityName").required=business||publicFigure;
+ $("representativeField").classList.toggle("hidden",!publicFigure);
+ $("representativeNameField").classList.toggle("hidden",!publicFigure||$("representativeRole").value!=="authorized_representative");
+ $("categoryLabel").textContent=business?"What kind of organization is this? *":publicFigure?"What is this public figure known for? *":"What best describes you? *";
+ const opts=business?["Company / Brand","Independent Business","Nonprofit / Charity","Community Organization","Creative Studio / Agency","Other Organization"]:publicFigure?["Musician / Recording Artist","Actor / Performer","Athlete","Television / Film Personality","Influencer / Public Personality","Author / Media Personality","Other Public Figure"]:["Artist / Designer","Musician / Performer","Streamer / Live Creator","Video Creator","Public Figure","Writer / Educator","Other Creator"];
+ $("category").innerHTML='<option value="">Choose a category</option>'+opts.map(x=>'<option>'+safe(x)+'</option>').join("");
+ $("storyHeading").textContent=business?"Tell us about your organization":publicFigure?"Tell us about this public figure":"Tell us your story";
+ $("storyHint").textContent=business?"What does your organization do, who does it serve, and how can people recognize its official presence?":publicFigure?"What is this person known for, and what reliable public sources connect them to this identity?":"What should people know about the person behind this account?";
+ $("reasonLabel").textContent=business?"Why should this organization account be verified? *":publicFigure?"Why should this public figure account receive Iconic Verified? *":"Why should this account be verified? *";
+ $("reason").placeholder=business?"Describe the organization, its work, audience or community, and what makes this account its authentic official presence.":publicFigure?"Describe the public figure's work and why this TikNation account is authentic. Include public evidence links in the previous step.":"Tell us what you create, who you are, and what makes your public identity recognizable.";
+ $("businessEmailField").classList.toggle("hidden",!(business||publicFigure));
+ $("contactEmailLabel").textContent=publicFigure?"Official representative / management contact email (optional)":"Official business contact email (optional)";
+ $("contactEmail").placeholder=publicFigure?"management@example.com":"hello@yourbusiness.com";
+}
+function showStage(n){
+ stage=n;
+ document.querySelectorAll(".stage").forEach((el,i)=>el.classList.toggle("active",i===n));
+ document.querySelectorAll(".stepdot").forEach((el,i)=>{el.classList.toggle("active",i===n);el.classList.toggle("done",i<n);el.querySelector("i").textContent=i<n?"✓":String(i+1);});
+ const pct=(n+1)*25;$("progressFill").style.width=pct+"%";$("progressLabel").textContent="STAGE "+(n+1)+" OF 4";$("progressPercent").textContent=pct+"%";
+ $("backBtn").disabled=n===0;$("nextBtn").classList.toggle("hidden",n===3);$("submitBtn").classList.toggle("hidden",n!==3);
+ if(n===3)renderReview();status("");
+}
+function fieldValue(id){return clean($(id).value);}
+function validateStage(){
+ if(stage===0){
+  if(!fieldValue("username"))return "Add your TikNation username.";
+  if(fieldValue("username").replace(/^@/,"").length>24)return "Your username must be 24 characters or fewer.";
+  if(!fieldValue("category"))return "Choose the category that best fits this account.";
+  if((type==="business"||type==="public_figure")&&!fieldValue("entityName"))return type==="business"?"Add the official organization name.":"Add the public figure's professional name.";
+  if(type==="public_figure"&&$("representativeRole").value==="authorized_representative"&&!fieldValue("representativeName"))return "Add the authorized representative's name.";
+ }
+ if(stage===1&&!fieldValue("presence"))return "Add a TikNation profile or official website link.";
+ if(stage===2&&!fieldValue("reason"))return "Tell us a little about this identity or organization.";
+ if(stage===2&&fieldValue("contactEmail")&&!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(fieldValue("contactEmail")))return "Check the business contact email format.";
+ return "";
+}
+function buildPayload(){
+ return {user_id:user.id,verification_type:type,username:fieldValue("username").replace(/^@/,""),entity_name:fieldValue("entityName")||null,category:fieldValue("category"),presence:fieldValue("presence"),reason:fieldValue("reason"),supporting_links:fieldValue("supportingLinks")||null,contact_email:(type==="business"||type==="public_figure")?(fieldValue("contactEmail")||null):null,representative_role:type==="public_figure"?$("representativeRole").value:null,representative_name:type==="public_figure"&&$("representativeRole").value==="authorized_representative"?fieldValue("representativeName"):null,status:"pending"};
+}
+function renderReview(){
+ const p=buildPayload(), items=[["Application path",type==="business"?"Business & Organization":type==="public_figure"?"Public Figure & Celebrity":"Individual Creator"],["TikNation username","@"+p.username], [type==="business"?"Organization name":"Public name",p.entity_name||"Not supplied"],...(type==="public_figure"?[["Applicant",p.representative_role==="self"?"Public figure":"Authorized representative"],...(p.representative_name?[["Representative name",p.representative_name]]:[])]:[]),["Category",p.category],["Primary presence",p.presence],["Other public links",p.supporting_links||"None supplied"],["Your story",p.reason],["Private contact",p.contact_email||"Not supplied"]];
+ $("reviewGrid").innerHTML=items.map((x,i)=>'<div class="review-item '+(i===5||i===6?'wide':'')+'"><small>'+safe(x[0])+'</small><strong>'+safe(x[1])+'</strong></div>').join("");
+}
+$("beginBtn").addEventListener("click",()=>{
+ if(!user){$("entryStatus").textContent="Please sign in to TikNation first, then return here to continue.";return;}
+ updateTypeCopy();$("choiceView").classList.add("hidden");$("wizard").classList.remove("hidden");$("portalTitle").textContent="Your verification journey";$("portalSubtitle").textContent=type==="business"?"The Official Organization path":type==="public_figure"?"The Iconic Verified public figure path":"The Verified Creator path";showStage(0);
+});
+$("nextBtn").addEventListener("click",()=>{const e=validateStage();if(e){status(e,true);return;}showStage(Math.min(3,stage+1));});
+$("backBtn").addEventListener("click",()=>showStage(Math.max(0,stage-1)));
+$("applicationForm").addEventListener("submit",async e=>{
+ e.preventDefault();const err=validateStage();if(err){status(err,true);return;}if(!$("confirmAccuracy").checked){status("Please confirm the application is accurate before submitting.",true);return;}
+ if(!user){status("Your session has expired. Sign in again before submitting.",true);return;}
+ $("submitBtn").disabled=true;$("nextBtn").disabled=true;status("Sending your application securely…");
+ const {data,error}=await db.from("verification_applications").insert(buildPayload()).select("id,created_at").single();
+ $("submitBtn").disabled=false;$("nextBtn").disabled=false;
+ if(error){status("We couldn't submit this application: "+error.message,true);return;}
+ $("wizard").classList.add("hidden");$("successView").classList.remove("hidden");$("referenceCode").textContent="TN-"+data.id.slice(0,8).toUpperCase();await loadMyApplications();
+});
+function renderApplication(app){
+ const statusClass=["pending","under_review","needs_information","verified","rejected"].includes(app.status)?app.status:"pending";
+ return '<article class="application"><div class="application-top"><div><b>'+safe(app.verification_type==="business"?"Business & Organization":app.verification_type==="public_figure"?"Public Figure & Celebrity":"Individual Creator")+'</b><br><small>@'+safe(app.username)+' · '+safe(dateLabel(app.created_at))+'</small></div><span class="pill '+statusClass+'">'+safe(niceStatus(app.status))+'</span></div>'+(app.reviewer_note?'<p><b>Reviewer update:</b> '+safe(app.reviewer_note)+'</p>':'')+'</article>';
+}
+async function loadMyApplications(){
+ if(!user)return;const {data,error}=await db.from("verification_applications").select("id,created_at,username,verification_type,status,reviewer_note").eq("user_id",user.id).order("created_at",{ascending:false});
+ if(error){$("myApplications").innerHTML='<div class="empty">Your applications could not be loaded right now.</div>';return;}
+ latestApps=data||[];$("myApplications").innerHTML=latestApps.length?latestApps.map(renderApplication).join(""):'<div class="empty">You have not submitted an application yet. Your next chapter starts when you do.</div>';$("myDashboard").classList.remove("hidden");
+}
+async function loadReviewQueue(){
+ const {data,error}=await db.from("verification_applications").select("id,created_at,username,verification_type,entity_name,category,presence,reason,supporting_links,contact_email,representative_name,representative_role,status,reviewer_note").order("created_at",{ascending:true});
+ if(error){$("reviewQueue").innerHTML='<div class="empty">The review queue is unavailable. Database permissions denied or the session needs refreshing.</div>';return;}
+ if(!data.length){$("reviewQueue").innerHTML='<div class="empty">The chamber is quiet. No applications are waiting.</div>';return;}
+ $("reviewQueue").innerHTML=data.map(app=>{
+  const details=[app.verification_type==="business"?"Business & Organization":app.verification_type==="public_figure"?"Public Figure & Celebrity":"Individual Creator","@"+app.username,app.entity_name||"",app.category,app.presence,app.supporting_links||"",app.reason,app.contact_email||"",app.representative_role||"",app.representative_name||""].filter(Boolean).join("\n");
+  return '<article class="admin-review" data-app="'+safe(app.id)+'"><div class="application-top"><div><b>'+safe(app.entity_name||("@"+app.username))+'</b><br><small>'+safe(app.verification_type)+" · "+safe(dateLabel(app.created_at))+'</small></div><span class="pill '+safe(app.status)+'">'+safe(niceStatus(app.status))+'</span></div><details style="margin:9px 0"><summary style="cursor:pointer;color:#c9b8ff;font-size:11px">Open private application details</summary><pre style="white-space:pre-wrap;overflow-wrap:anywhere;font:11px/1.6 sans-serif;color:#d8d0e6">'+safe(details)+'</pre></details><label style="display:block;font-size:10px;color:#c9bdd9">Message to applicant (shared with them)<textarea class="review-note" maxlength="2000" placeholder="Optional update visible to the applicant">'+safe(app.reviewer_note||"")+'</textarea></label><div class="review-controls"><select class="review-status" aria-label="Review decision"><option value="under_review">Under review</option><option value="needs_information">More information needed</option><option value="verified">Approve & activate badge</option><option value="rejected">Not approved</option></select><button class="btn primary save-review" type="button">Save decision</button></div><div class="statusline" aria-live="polite"></div></article>';
+ }).join("");
+ $("reviewQueue").querySelectorAll(".admin-review").forEach(el=>{
+  const app=data.find(x=>x.id===el.dataset.app);el.querySelector(".review-status").value=["under_review","needs_information","verified","rejected"].includes(app.status)?app.status:"under_review";
+  el.querySelector(".save-review").addEventListener("click",async()=>{
+   const btn=el.querySelector(".save-review"),line=el.querySelector(".statusline");btn.disabled=true;line.textContent="Saving decision…";
+   const {data:result,error}=await db.rpc("review_verification_application",{p_application_id:app.id,p_status:el.querySelector(".review-status").value,p_reviewer_note:el.querySelector(".review-note").value||null});
+   btn.disabled=false;
+   if(error){line.textContent="Could not save: "+error.message;line.classList.add("error");return;}
+   line.classList.remove("error");line.textContent="Decision saved. The applicant's status has been updated.";
+   await loadReviewQueue();
+  });
+ });
+}
+$("viewApplicationsBtn").addEventListener("click",()=>{$("successView").classList.add("hidden");$("myDashboard").scrollIntoView({behavior:"smooth",block:"start"});});
+$("newApplicationBtn").addEventListener("click",()=>{type="individual";selectType(type);$("representativeRole").value="self";$("representativeName").value="";$("contactEmail").value="";updateTypeCopy();$("myDashboard").classList.add("hidden");$("successView").classList.add("hidden");$("choiceView").classList.remove("hidden");$("wizard").classList.add("hidden");$("portalTitle").textContent="Choose your path";$("portalSubtitle").textContent="Two paths. One promise: authenticity.";window.scrollTo({top:0,behavior:"smooth"});});
+const {data:sessionData}=await db.auth.getSession();session=sessionData.session;user=session?.user||null;
+if(!user){$("portalSubtitle").textContent="Sign in to TikNation to begin your private application.";status("You can explore the experience now. Sign in to submit and track an application.",true);}
+else{
+ const {data:profile}=await db.from("profiles").select("username").eq("id",user.id).maybeSingle();
+ if(profile?.username)$("username").value=profile.username;
+ await loadMyApplications();
+ const aal=await db.auth.mfa.getAuthenticatorAssuranceLevel();
+ isFounder=(user.email||"").toLowerCase()===FOUNDER_EMAIL&&aal.data?.currentLevel==="aal2";
+ if(isFounder){$("founderPanel").classList.remove("hidden");await loadReviewQueue();}
+}
+})();
+</script>
+</body></html>
