@@ -475,6 +475,7 @@ button:hover,.action:hover,.pill:hover,.quick-card:hover{filter:brightness(1.12)
 <section class="view active" id="view-home">
 <div class="home-hero"><div class="hero-orbit orbit-a"></div><div class="hero-orbit orbit-b"></div><div class="portal-art" aria-hidden="true"><div class="portal-halo halo-outer"></div><div class="portal-halo halo-middle"></div><div class="portal-halo halo-inner"></div><div class="portal-core"><span>✦</span></div><div class="portal-orbit orbit-one"><i>✧</i></div><div class="portal-orbit orbit-two"><i>✦</i></div><div class="portal-orbit orbit-three"><i>✧</i></div><div class="portal-star star-a">✦</div><div class="portal-star star-b">✧</div><div class="portal-star star-c">✦</div></div><div class="hero-spark">✦</div><div class="cosmic-ring ring-three"></div><div class="hero-energy energy-one"></div><div class="hero-energy energy-two"></div><div class="home-hero-copy"><div class="eyebrow"><span class="status-dot"></span> YOUR UNIVERSE IS OPEN</div><div class="home-greeting">WELCOME TO<br><span>YOUR UNIVERSE.</span></div><p>A world of possibilities. Discover creators, step into live moments, and turn the ideas in your imagination into something real.</p><div class="actions"><button class="action primary" onclick="navigate('discover')">Discover creators&nbsp; ↗</button><a class="action" href="../next-rebuild/synthetic-camera-studio.html">＋ Create something</a></div></div><div class="hero-bottom-label">TIKNATION <span>·</span> YOUR VOICE. YOUR WORLD.</div></div>
 <div class="home-quick"><button class="quick-card quick-live" onclick="(window.location.href='./live-worlds.html')"><span class="quick-icon">◉</span><span><b>Live Worlds</b><small>Step into the moment</small></span><span class="quick-arrow">↗</span></button><a class="quick-card quick-create" href="../next-rebuild/synthetic-camera-studio.html"><span class="quick-icon">✧</span><span><b>Creation Portal</b><small>Bring an idea to life</small></span><span class="quick-arrow">↗</span></a><button class="quick-card quick-discover" onclick="navigate('discover')"><span class="quick-icon">⌕</span><span><b>Discover</b><small>Meet your next favorite</small></span><span class="quick-arrow">↗</span></button></div>
+<div class="home-trust-panel"><div class="trust-orb" aria-hidden="true">🛡️</div><div class="trust-copy"><div class="trust-kicker">SAFETY &amp; TRUST</div><h2>Your space. Your boundaries.</h2><p>Explore safety resources, reporting guidance, and ways to manage your TikNation experience.</p></div><a class="trust-action" href="../next-rebuild/safety-center.html">Visit Safety Center <span aria-hidden="true">↗</span></a></div>
 <div class="home-footer-note"><span>✦</span><b>Your voice matters here.</b><small>Welcome to TikNation.</small></div>
 </section><section class="view" id="view-discover"><div class="section-head"><div><div class="eyebrow">FIND YOUR NEXT FAVORITE</div><h2>Discover</h2><p class="muted">Explore the people and ideas shaping the community.</p></div><input class="search" id="discoverSearch" placeholder="Search creators or interests…" oninput="filterCreators()"></div><div class="discover-filters"><button class="discover-chip active" data-category="all" onclick="setDiscoverCategory('all',this)">✦ All creators</button><button class="discover-chip" data-category="art" onclick="setDiscoverCategory('art',this)">🎨 Art</button><button class="discover-chip" data-category="music" onclick="setDiscoverCategory('music',this)">♫ Music</button><button class="discover-chip" data-category="makers" onclick="setDiscoverCategory('makers',this)">💡 Ideas</button><button class="discover-chip" data-category="community" onclick="setDiscoverCategory('community',this)">✦ Community</button></div><div class="grid" id="creatorGrid"><div class="empty discover-empty">✨ Loading real community creators…</div></div><div class="creator-modal" id="creatorModal" hidden><div class="creator-modal-backdrop" onclick="closeCreator()"></div><section class="creator-modal-card" role="dialog" aria-modal="true" aria-labelledby="creatorModalName"><button class="creator-modal-close" onclick="closeCreator()" aria-label="Close">×</button><div class="creator-modal-art" id="creatorModalArt">✦</div><div class="tag" id="creatorModalCategory">CREATOR</div><h2 id="creatorModalName">Creator</h2><p id="creatorModalBio"></p><div class="creator-modal-stats"><span><b id="creatorModalPosts">0</b><small>Posts</small></span><span><b id="creatorModalFollowers">0</b><small>Followers</small></span><span><b>Preview</b><small>Profile</small></span></div><button class="action primary" id="creatorModalFollow" onclick="followFromModal()" hidden>＋ Follow</button><div id="creatorModalCommunityPosts" class="creator-modal-community-posts"></div><p class="creator-modal-note">Community profile · based on published TikNation posts.</p></section></div><div class="toast" id="toast"></div>
 
@@ -579,4 +580,43 @@ function renderTikAccount(){const user=tikSession?.user||null;const name=tikProf
 const tikOriginalNavigate=navigate;function navigate(name){tikOriginalNavigate(name);if(name==="profile"||name==="settings")renderTikAccount();}
 loadTikSettings();
 </script><nav class="mobilebar" aria-label="Main navigation"><button data-view="home" onclick="navigate('home')"><span>⌂</span>Home</button><button data-view="discover" onclick="navigate('discover')"><span>⌕</span>Discover</button><button onclick="location.href='./live-worlds.html'"><span>◉</span>LIVE</button><button data-view="community" onclick="navigate('community')"><span>◎</span>Community</button><button onclick="navigate('messages')"><span>✉</span>Messages</button><button data-view="profile" onclick="navigate('profile')"><span>◌</span>Profile</button></nav></body></html>
-<style></style>
+<style>
+/* COLOR & WONDER PASS — brighter accents, playful motion, and a visible safety path */
+:root{--coral:#ff987d;--sun:#ffd36e;--mint:#7df7c7;--sky:#73bfff;--lilac:#c5a0ff;--berry:#ff79bd}
+.top{background:linear-gradient(100deg,#090719f2,#17102bf0 52%,#091d2af2);border-bottom-color:#a58aff35}
+.brandmark{background:conic-gradient(from 15deg,var(--mint),var(--sky),var(--lilac),var(--berry),var(--coral),var(--sun),var(--mint))}
+.navbtn:nth-of-type(2n){--nav-accent:var(--berry)}
+.navbtn:nth-of-type(3n){--nav-accent:var(--sky)}
+.navbtn:hover{border-color:color-mix(in srgb,var(--nav-accent,var(--cyan)) 55%,transparent);box-shadow:0 0 22px color-mix(in srgb,var(--nav-accent,var(--cyan)) 16%,transparent)}
+.navbtn.active{background:linear-gradient(100deg,#72f5ed20,#a58aff20,#ff76c812)}
+.home-hero{background:radial-gradient(ellipse at 76% 45%,#7045e877 0,transparent 42%),radial-gradient(ellipse at 91% 8%,#ff53c344,transparent 31%),radial-gradient(ellipse at 63% 100%,#11d7d366,transparent 38%),radial-gradient(ellipse at 15% 85%,#ffb45b22,transparent 34%),linear-gradient(135deg,#090819 0%,#21123e 46%,#092238 100%)}
+.home-hero .eyebrow{color:#8effec;border-color:#8effec77;background:linear-gradient(90deg,#72f5ed18,#a58aff18,#ff76c812)}
+.home-greeting{background-image:linear-gradient(100deg,#fff 0%,#8effec 24%,#9ec6ff 47%,#d5a5ff 68%,#ff91cc 84%,#ffd58a 100%);filter:drop-shadow(0 0 22px #a58aff22)}
+.quick-card{border-color:#9c8cff45;background:linear-gradient(130deg,#17132feF,#10283beF 55%,#281431eF)}
+.quick-live .quick-icon{color:#8effec;background:linear-gradient(135deg,#72f5ed33,#73bfff28)}
+.quick-create .quick-icon{color:#e0b5ff;background:linear-gradient(135deg,#a58aff38,#ff76c82b)}
+.quick-discover .quick-icon{color:#ffd58a;background:linear-gradient(135deg,#ffd36e32,#ff987d25)}
+.quick-card:after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(115deg,transparent 15%,#ffffff0b 48%,transparent 72%);transform:translateX(-110%);transition:transform .7s}
+.quick-card:hover:after{transform:translateX(110%)}
+.interest-row button:nth-child(4n+1){border-color:#72f5ed55}
+.interest-row button:nth-child(4n+2){border-color:#ff76c855}
+.interest-row button:nth-child(4n+3){border-color:#a58aff66}
+.interest-row button:nth-child(4n){border-color:#ffd36e55}
+.spotlight-card:nth-child(4n+1){box-shadow:inset 0 0 35px #72f5ed08}
+.spotlight-card:nth-child(4n+2){box-shadow:inset 0 0 35px #ff76c808}
+.spotlight-card:nth-child(4n+3){box-shadow:inset 0 0 35px #a58aff0a}
+.art,.spotlight-art{background-image:radial-gradient(circle at 25% 20%,#72f5ed30,transparent 34%),radial-gradient(circle at 80% 80%,#ff76c830,transparent 38%),linear-gradient(135deg,#292052,#123842)}
+.home-trust-panel{position:relative;isolation:isolate;display:flex;align-items:center;gap:18px;margin-top:24px;padding:20px 22px;border:1px solid #72f5ed55;border-radius:22px;overflow:hidden;background:linear-gradient(110deg,#0d282d,#171634 48%,#321936);box-shadow:0 14px 40px #0003,0 0 32px #72f5ed0b}
+.home-trust-panel:before{content:"";position:absolute;z-index:-1;inset:0;background:radial-gradient(circle at 0 50%,#72f5ed22,transparent 38%),radial-gradient(circle at 100% 50%,#ff76c822,transparent 38%)}
+.trust-orb{flex:0 0 54px;width:54px;height:54px;display:grid;place-items:center;border-radius:18px;font-size:27px;background:linear-gradient(135deg,#72f5ed33,#a58aff44,#ff76c833);box-shadow:0 0 25px #72f5ed20}
+.trust-copy{min-width:0;flex:1}
+.trust-kicker{font-size:10px;letter-spacing:.2em;font-weight:950;color:#8effec}
+.trust-copy h2{font-size:clamp(18px,2.5vw,23px);margin:3px 0;background:linear-gradient(90deg,#fff,#9cf8ed,#d9b4ff);color:transparent;background-clip:text}
+.trust-copy p{margin:0;color:#d2cde8;font-size:13px}
+.trust-action{flex:0 0 auto;text-decoration:none;color:#100d25;font-weight:900;border-radius:13px;padding:12px 16px;background:linear-gradient(100deg,#8effec,#b9a3ff 55%,#ff9bcf);box-shadow:0 0 25px #a58aff30;transition:transform .2s,box-shadow .2s}
+.trust-action:hover{transform:translateY(-2px);box-shadow:0 8px 30px #ff76c833}
+.action:focus-visible,.trust-action:focus-visible,.quick-card:focus-visible{outline:3px solid #ffd36e;outline-offset:4px}
+@media(max-width:600px){.home-trust-panel{align-items:flex-start;flex-wrap:wrap;padding:17px}.trust-copy{flex:1 1 calc(100% - 75px)}.trust-action{width:100%;text-align:center}.trust-copy p{font-size:12px}}
+@media(prefers-reduced-motion:reduce){.quick-card:after{display:none}.trust-action{transition:none}}
+
+</style>
