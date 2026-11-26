@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#100b25">
+<title>TikNation · Session Activity</title>
+<style>
+:root{color-scheme:dark;--cyan:#7deaff;--violet:#9d7cff;--pink:#e27bff;--line:#ffffff20}
+*{box-sizing:border-box}body{margin:0;min-height:100vh;background:radial-gradient(circle at 15% 5%,#123b55 0,transparent 32%),radial-gradient(circle at 90% 80%,#42245d 0,transparent 35%),#080c18;color:#f7f5ff;font:15px/1.55 system-ui,sans-serif;padding:20px}
+main{max-width:800px;margin:26px auto}.brand{color:var(--cyan);font-weight:800;letter-spacing:.12em;font-size:12px}.hero h1{font-size:clamp(30px,6vw,48px);line-height:1.08;margin:12px 0}.hero p{color:#b7bfd2;max-width:650px}.card{background:linear-gradient(145deg,#111b2eeb,#17132aee);border:1px solid var(--line);border-radius:22px;padding:22px;margin:18px 0;box-shadow:0 18px 60px #0006}.card h2{margin:0 0 8px;font-size:21px}.muted{color:#aeb7cb}.btn{border:1px solid #7deaff66;background:linear-gradient(120deg,#075b78,#4d388e,#8c397e);color:white;border-radius:12px;padding:12px 17px;font-weight:700;cursor:pointer}.btn.secondary{background:#ffffff0c;border-color:#ffffff30}.btn.danger{background:#52253d;border-color:#ff9ab866}.row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}.detail{padding:12px 0;border-top:1px solid var(--line);display:flex;justify-content:space-between;gap:14px}.detail span:first-child{color:#aeb7cb}.detail span:last-child{text-align:right;overflow-wrap:anywhere}.status{min-height:24px;margin:10px 0;color:#a8f2d0}.warning{border-color:#ffc86b44}.hidden{display:none!important}a{color:var(--cyan)}@media(max-width:560px){body{padding:14px}.card{padding:17px}.detail{flex-direction:column;gap:3px}.detail span:last-child{text-align:left}}
+</style>
+</head>
+<body><main>
+<header class="hero"><div class="brand">✦ TIKNATION · SESSION ACTIVITY</div><h1>Know where you're signed in.</h1><p>Review the session currently open on this device, your authentication protection, and quickly sign out if something feels wrong.</p><p><a href="index.html">← Back to TikNation</a> · <a href="security.html">Two-step verification</a></p></header>
+<section class="card hidden" id="signedOut"><h2>Sign in required</h2><p class="muted">Sign in to TikNation first to review your current session.</p><a class="btn" href="index.html">Open TikNation</a></section>
+<section class="card hidden" id="sessionCard"><h2>🟢 Current session</h2><p class="muted">This information describes the session this page can access—not a list of every device logged into your account.</p><div id="sessionDetails"></div><div class="row" style="margin-top:16px"><button class="btn danger" id="signOutCurrent">Sign out on this device</button><button class="btn danger" id="signOutAll">Sign out everywhere</button></div></section>
+<section class="card hidden" id="protectionCard"><h2>🔐 Account protection</h2><div id="protectionDetails" class="muted">Checking authentication protection…</div><p style="margin-top:16px"><a class="btn secondary" href="security.html">Manage two-step verification</a></p></section>
+<section class="card warning"><h2>About login history</h2><p class="muted">TikNation does not currently provide a verified list of past logins, device locations, IP addresses, or all active devices on this page. We won't invent activity records. A full login-history feature would require secure server-side event logging and a trusted session-management backend.</p></section>
+<div id="status" class="status" role="status" aria-live="polite"></div>
+</main>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.119.2"></script>
+<script>
+(async function(){
+"use strict";
+const db=window.supabase.createClient("https://mekzfezaefcimxncklfj.supabase.co","sb_publishable_Cr0ssF3pEz5lE08KwvyacQ_dKC2IUbQ");
+const $=id=>document.getElementById(id);
+function say(text,isError=false){$("status").textContent=text;$("status").style.color=isError?"#ffb4c0":"#a8f2d0";}
+function safe(text){return String(text??"").replace(/[&<>"']/g,ch=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[ch]));}
+const {data,error}=await db.auth.getSession();
+const session=data?.session;
+if(error||!session){$("signedOut").classList.remove("hidden");return;}
+$("sessionCard").classList.remove("hidden");$("protectionCard").classList.remove("hidden");
+const expiry=session.expires_at?new Date(session.expires_at*1000).toLocaleString():"Not provided";
+const browser=navigator.userAgent||"Browser information unavailable";
+$("sessionDetails").innerHTML='<div class="detail"><span>Signed-in account</span><span>'+safe(session.user?.email||"Email not available")+'</span></div><div class="detail"><span>Session status</span><span>Active on this device</span></div><div class="detail"><span>Session expires</span><span>'+safe(expiry)+'</span></div><div class="detail"><span>Browser/device hint</span><span>'+safe(browser)+'</span></div>';
+const aal=await db.auth.mfa.getAuthenticatorAssuranceLevel();
+const factors=await db.auth.mfa.listFactors();
+const verified=(factors.data?.totp||[]).filter(f=>f.status==="verified").length;
+const level=aal.data?.currentLevel||"unknown";
+$("protectionDetails").innerHTML='<div class="detail"><span>Current assurance</span><span>'+safe(level)+'</span></div><div class="detail"><span>Verified authenticator factors</span><span>'+verified+'</span></div><div class="detail"><span>Two-step verification</span><span>'+(verified?"Authenticator enrolled":"Not enrolled")+'</span></div>';
+$("signOutCurrent").addEventListener("click",async()=>{if(!confirm("Sign out of TikNation on this device?"))return;const r=await db.auth.signOut({scope:"local"});if(r.error){say(r.error.message,true);return;}say("Signed out. Returning to TikNation…");location.href="index.html";});
+$("signOutAll").addEventListener("click",async()=>{if(!confirm("Sign out everywhere? Other devices may need to sign in again."))return;const r=await db.auth.signOut({scope:"global"});if(r.error){say(r.error.message,true);return;}say("Sign-out everywhere requested. Returning to TikNation…");location.href="index.html";});
+})();
+</script>
+</body></html>
