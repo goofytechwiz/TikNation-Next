@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 96" role="img" aria-labelledby="title desc">
+<title id="title">Beta Pioneer</title><desc id="desc">A luminous portal compass with cyan, violet and gold details.</desc>
+<defs>
+ <linearGradient id="ring" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#62f5ff"/><stop offset=".48" stop-color="#a77aff"/><stop offset="1" stop-color="#ffd77a"/></linearGradient>
+ <linearGradient id="core" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#e8ffff"/><stop offset=".45" stop-color="#8cdbff"/><stop offset="1" stop-color="#b78aff"/></linearGradient>
+ <radialGradient id="portal"><stop stop-color="#9efaff" stop-opacity=".85"/><stop offset=".55" stop-color="#7555e8" stop-opacity=".55"/><stop offset="1" stop-color="#1b1745" stop-opacity="0"/></radialGradient>
+ <filter id="glow" x="-60%" y="-60%" width="220%" height="220%"><feGaussianBlur stdDeviation="3.2" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+</defs>
+<circle cx="48" cy="48" r="43" fill="#151632" stroke="url(#ring)" stroke-width="2.8"/>
+<circle cx="48" cy="48" r="36.5" fill="none" stroke="#d9faff" stroke-opacity=".45" stroke-width="1" stroke-dasharray="2 4"/>
+<circle cx="48" cy="48" r="29" fill="url(#portal)" stroke="url(#ring)" stroke-width="2.4" filter="url(#glow)"/>
+<path d="M48 15 54 37 76 48 54 54 48 81 42 54 20 48 42 37Z" fill="none" stroke="url(#ring)" stroke-width="2" stroke-linejoin="round"/>
+<path d="M48 27c10 7 15 14 15 21S58 62 48 69C38 62 33 55 33 48s5-14 15-21Z" fill="none" stroke="#c9faff" stroke-width="2.2"/>
+<path d="m48 35 8 13-8 13-8-13Z" fill="url(#core)" stroke="#fff" stroke-width="1.2" filter="url(#glow)"/>
+<circle cx="48" cy="48" r="3" fill="#fff"/>
+<g fill="#fff4c9" filter="url(#glow)"><path d="m17 25 2 5 5 2-5 2-2 5-2-5-5-2 5-2Z"/><path d="m76 66 1.5 4 4 1.5-4 1.5-1.5 4-1.5-4-4-1.5 4-1.5Z"/></g>
+<circle cx="70" cy="23" r="2" fill="#71f4ff"/><circle cx="25" cy="72" r="2" fill="#c49aff"/>
+</svg>
