@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>TikNation · Account Security</title>
+<style>
+:root{color-scheme:dark;--cyan:#7deaff;--violet:#9d7cff;--pink:#e27bff;--panel:#101629;--line:#ffffff20}
+*{box-sizing:border-box}body{margin:0;min-height:100vh;background:radial-gradient(circle at 15% 5%,#123b55 0,transparent 32%),radial-gradient(circle at 90% 80%,#42245d 0,transparent 35%),#080c18;color:#f7f5ff;font:15px/1.55 system-ui,sans-serif;padding:24px}
+main{max-width:760px;margin:30px auto}.brand{color:var(--cyan);font-weight:800;letter-spacing:.12em;font-size:12px}.hero h1{font-size:clamp(30px,6vw,48px);line-height:1.08;margin:12px 0}.hero p{color:#b7bfd2;max-width:620px}.card{background:linear-gradient(145deg,#111b2eeb,#17132aee);border:1px solid var(--line);border-radius:22px;padding:22px;margin:18px 0;box-shadow:0 18px 60px #0006}.card h2{margin:0 0 8px;font-size:21px}.muted{color:#aeb7cb}.btn{border:1px solid #7deaff66;background:linear-gradient(120deg,#075b78,#4d388e,#8c397e);color:white;border-radius:12px;padding:12px 17px;font-weight:700;cursor:pointer}.btn.secondary{background:#ffffff0c;border-color:#ffffff30}.btn.danger{background:#52253d;border-color:#ff9ab866}.btn:disabled{opacity:.55;cursor:wait}.field{display:block;width:100%;margin:12px 0;padding:13px 14px;border:1px solid #ffffff30;border-radius:12px;background:#080f1d;color:white;font:inherit}.row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}.qr{width:220px;height:220px;max-width:100%;object-fit:contain;background:white;border-radius:12px;padding:8px}.secret{word-break:break-all;padding:12px;border:1px dashed #7deaff66;border-radius:10px;color:#d5f8ff}.status{margin-top:12px;color:#a8f2d0;min-height:24px}.error{color:#ffb4c0;min-height:24px}.factor{padding:12px 0;border-top:1px solid var(--line);display:flex;justify-content:space-between;gap:12px;align-items:center}.hidden{display:none!important}a{color:var(--cyan)}@media(max-width:560px){body{padding:16px}.card{padding:17px}.factor{align-items:flex-start;flex-direction:column}}
+</style>
+</head>
+<body>
+<main>
+<div class="hero"><div class="brand">✦ TIKNATION · ACCOUNT PROTECTION</div><h1>Secure your account.</h1><p>Add an authenticator-app verification step to help protect your TikNation account. This uses time-based codes and does not require a paid SMS service.</p><p><a href="index.html">← Back to TikNation</a></p></div>
+<section class="card" id="signedOut"><h2>Sign in required</h2><p class="muted">Open TikNation and sign in first, then return here to manage your security.</p><a class="btn" href="index.html">Open TikNation</a></section>
+<section class="card hidden" id="securityPanel">
+<h2>Two-step verification</h2><p class="muted">Use an authenticator app such as Google Authenticator, Microsoft Authenticator, or 1Password. Once verified, TikNation will request a code when you sign in. You can register a second authenticator on another device as a backup; keep at least one verified factor available.</p>
+<div id="factorList" class="muted">Checking your enrolled factors…</div>
+<div class="row" style="margin-top:16px"><button class="btn" id="startEnroll">＋ Set up authenticator</button><button class="btn secondary" id="refreshFactors">Refresh status</button></div>
+</section>
+<section class="card hidden" id="enrollPanel">
+<h2>Connect your authenticator</h2><p class="muted">Scan this QR code with your authenticator app. If scanning isn't possible, enter the setup key manually. Keep the key private.</p>
+<img id="qrCode" class="qr" alt="Authenticator setup QR code">
+<div class="secret" id="manualSecret"></div>
+<label for="enrollCode">Enter the six-digit code from your app</label><input class="field" id="enrollCode" inputmode="numeric" autocomplete="one-time-code" maxlength="6" placeholder="000000">
+<div class="row"><button class="btn" id="verifyEnroll">Verify and enable</button><button class="btn secondary" id="cancelEnroll">Cancel</button></div>
+<div id="enrollError" class="error"></div>
+</section>
+<div id="pageStatus" class="status" role="status" aria-live="polite"></div>
+</main>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.119.2"></script>
+<script>
+(async function(){
+"use strict";
+const db=window.supabase.createClient("https://mekzfezaefcimxncklfj.supabase.co","sb_publishable_Cr0ssF3pEz5lE08KwvyacQ_dKC2IUbQ");
+const $=id=>document.getElementById(id);let pendingFactor=null;
+function message(t,isError=false){$("pageStatus").textContent=t;$("pageStatus").style.color=isError?"#ffb4c0":"#a8f2d0"}
+function err(t){$("enrollError").textContent=t||""}
+const {data:{session}}=await db.auth.getSession();
+if(!session){$("signedOut").classList.remove("hidden");return;}
+$("signedOut").classList.add("hidden");$("securityPanel").classList.remove("hidden");
+async function loadFactors(){
+ const {data,error}=await db.auth.mfa.listFactors();
+ if(error){$("factorList").textContent="Could not load your security factors. Please refresh and try again.";message(error.message,true);return;}
+ const factors=[...(data.totp||[]),...(data.phone||[])];
+ if(!factors.length){$("factorList").innerHTML='<p class="muted">No second factor is enrolled yet. Your account is currently using password or email verification only.</p>';return;}
+ $("factorList").innerHTML=factors.map(f=>'<div class="factor"><span><b>'+String(f.friendly_name||f.factor_type||"Authenticator").replace(/[&<>"]/g,"")+'</b><br><small class="muted">'+f.factor_type+' · '+f.status+'</small></span><button class="btn danger" data-unenroll="'+f.id+'">Remove factor</button></div>').join("");
+}
+$("startEnroll").addEventListener("click",async()=>{
+ err("");message("Preparing secure authenticator setup…");
+ const {data,error}=await db.auth.mfa.enroll({factorType:"totp",friendlyName:"TikNation authenticator"});
+ if(error){message(error.message,true);return;}
+ pendingFactor=data.id;
+ const qr=data.totp.qr_code||"";
+ $("qrCode").src=qr.startsWith("data:")?qr:"data:image/svg+xml;charset=utf-8,"+encodeURIComponent(qr);
+ $("manualSecret").textContent="Manual setup key: "+data.totp.secret;
+ $("enrollPanel").classList.remove("hidden");$("enrollCode").focus();message("Scan the code, then enter the six-digit verification code.");
+});
+$("verifyEnroll").addEventListener("click",async()=>{
+ err("");const code=$("enrollCode").value.replace(/\D/g,"");if(!pendingFactor||code.length!==6){err("Enter the six-digit code from your authenticator app.");return;}
+ const challenge=await db.auth.mfa.challenge({factorId:pendingFactor});if(challenge.error){err(challenge.error.message);return;}
+ const verify=await db.auth.mfa.verify({factorId:pendingFactor,challengeId:challenge.data.id,code});
+ if(verify.error){err(verify.error.message);return;}
+ $("enrollPanel").classList.add("hidden");$("enrollCode").value="";$("manualSecret").textContent="";$("qrCode").removeAttribute("src");pendingFactor=null;message("Two-step verification is now enabled for this account.");await loadFactors();
+});
+$("cancelEnroll").addEventListener("click",async()=>{
+ if(pendingFactor)await db.auth.mfa.unenroll({factorId:pendingFactor});
+ pendingFactor=null;$("enrollPanel").classList.add("hidden");$("enrollCode").value="";$("manualSecret").textContent="";$("qrCode").removeAttribute("src");message("Authenticator setup cancelled.");await loadFactors();
+});
+$("refreshFactors").addEventListener("click",loadFactors);
+$("factorList").addEventListener("click",async e=>{
+ const b=e.target.closest("[data-unenroll]");if(!b)return;
+ if(!confirm("Remove this verification factor? You may need to verify your identity again."))return;
+ const r=await db.auth.mfa.unenroll({factorId:b.dataset.unenroll});
+ if(r.error){message(r.error.message,true);return;}
+ message("Verification factor removed.");await loadFactors();
+});
+await loadFactors();
+})();
+</script>
+</body></html>
