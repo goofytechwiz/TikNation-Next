@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#080813">
+<meta name="description" content="Complete your private TikNation age check.">
+<title>TikNation · Age Check</title>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<style>
+:root{color-scheme:dark;--bg:#070711;--panel:#131326;--line:#302847;--purple:#8d63ff;--cyan:#00c8ff;--muted:#b4b0c8;--green:#72f0c2;--red:#ff8ba6}
+*{box-sizing:border-box}body{margin:0;min-height:100vh;background:radial-gradient(ellipse at 15% 0%,#251344 0,transparent 42%),radial-gradient(ellipse at 90% 10%,#073343 0,transparent 35%),var(--bg);color:#fff;font:15px/1.55 system-ui,-apple-system,Segoe UI,sans-serif}.wrap{max-width:720px;margin:auto;padding:22px}.top{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;border-bottom:1px solid var(--line);padding-bottom:16px}.brand{font-weight:900;font-size:1.25rem}.brand span{color:var(--cyan)}a{color:#b8eaff}.card{margin-top:24px;padding:clamp(20px,5vw,34px);border:1px solid var(--line);border-radius:22px;background:#111120ed;box-shadow:0 22px 70px #0005}.eyebrow{font-size:.75rem;letter-spacing:.18em;color:#bda7ff;font-weight:900}.card h1{font-size:clamp(1.8rem,6vw,2.6rem);line-height:1.12;margin:10px 0}.muted{color:var(--muted)}label{display:block;margin:22px 0 8px;font-weight:800}.field{width:100%;padding:14px;border:1px solid #4a3e68;border-radius:12px;background:#080812;color:#fff;font:inherit}.field:focus{outline:2px solid var(--cyan);outline-offset:2px}button{border:0;border-radius:12px;padding:13px 18px;background:linear-gradient(110deg,var(--purple),#565cff);color:#fff;font:inherit;font-weight:800;cursor:pointer;margin-top:16px}button:disabled{opacity:.5;cursor:wait}.status{margin-top:16px;padding:13px 15px;border-radius:12px;background:#1a1830;color:#d8d1e8;white-space:pre-wrap}.status.error{background:#351725;color:#ffc1d0}.status.ok{background:#102c26;color:#b3ffe1}.note{margin-top:18px;padding:14px;border:1px solid #51436f;border-radius:13px;background:#171329;color:#d2c9e4;font-size:.86rem}.actions{display:flex;gap:16px;flex-wrap:wrap;margin-top:20px}.actions a{font-size:.9rem}
+</style>
+</head>
+<body>
+<main class="wrap">
+<header class="top"><div class="brand">TikNation <span>AGE CHECK</span></div><a href="./live-worlds.html">Back to LIVE</a></header>
+<section class="card">
+  <div class="eyebrow">A PRIVATE ACCOUNT-SAFETY CHECK</div>
+  <h1>Confirm your date of birth.</h1>
+  <p class="muted">TikNation uses your date of birth to apply its minimum-age rules. Members aged 13 and older may watch eligible LIVE broadcasts. Starting a broadcast, joining a guest stage, or taking part in a LIVE Battle is restricted to members aged 18 and older who meet the additional creator requirements.</p>
+  <div id="signedOut" class="status error" hidden>Sign in to TikNation first, then return here to complete your age check. <a href="./index.html">Open TikNation</a>.</div>
+  <form id="ageForm" hidden>
+    <label for="dob">Date of birth</label>
+    <input class="field" id="dob" name="date_of_birth" type="date" min="1900-01-01" required>
+    <button id="submitAge" type="submit">Complete age check</button>
+  </form>
+  <div id="status" class="status" role="status" aria-live="polite">Checking your TikNation session…</div>
+  <div class="note"><strong>Your privacy:</strong> Your date of birth is stored in restricted account-safety records and is not shown on your public profile. This is a self-declared date of birth, not independent identity verification. TikNation may require stronger age assurance for other safety-sensitive features.</div>
+  <div class="actions"><a href="./live-worlds.html">Return to TikNation LIVE</a><a href="./index.html">TikNation home</a></div>
+</section>
+</main>
+<script>
+const SUPABASE_URL="https://mekzfezaefcimxncklfj.supabase.co";
+const SUPABASE_PUBLISHABLE_KEY="sb_publishable_Cr0ssF3pEz5lE08KwvyacQ_dKC2IUbQ";
+const db=window.supabase.createClient(SUPABASE_URL,SUPABASE_PUBLISHABLE_KEY);
+const $=id=>document.getElementById(id);
+const endpoint=SUPABASE_URL+"/functions/v1/tiknation-age-assurance";
+function showStatus(message,type=""){$("status").textContent=message;$("status").className="status"+(type?" "+type:"");}
+async function send(action,extra={}){
+  const {data:{session},error:sessionError}=await db.auth.getSession();
+  if(sessionError||!session?.access_token)throw new Error("Sign in to TikNation first, then return to this page.");
+  const response=await fetch(endpoint,{method:"POST",headers:{"Authorization":"Bearer "+session.access_token,"apikey":SUPABASE_PUBLISHABLE_KEY,"Content-Type":"application/json"},body:JSON.stringify({action,...extra})});
+  let result={};try{result=await response.json()}catch{}
+  if(!response.ok)throw new Error(result.error||"The age check could not be completed.");
+  if(result.error)throw new Error(result.error);
+  return result;
+}
+async function boot(){
+  const {data:{session}}=await db.auth.getSession();
+  if(!session){$("signedOut").hidden=false;$("ageForm").hidden=true;showStatus("You are not signed in.","error");return;}
+  try{
+    const result=await send("status");
+    if(result.age_check_complete){
+      $("ageForm").hidden=true;
+      showStatus("Your TikNation age check is already complete. You can return to LIVE. Broadcasting still requires age 18+, a verified email, a complete profile, good account standing, and creator approval during beta.","ok");
+    }else{
+      $("ageForm").hidden=false;
+      $("dob").max=new Date().toISOString().slice(0,10);
+      showStatus("Enter your date of birth to continue. TikNation will apply the minimum-age rules securely on the server.");
+    }
+  }catch(error){showStatus(error.message||"Could not check your age status.","error");}
+}
+$("ageForm").addEventListener("submit",async event=>{
+  event.preventDefault();
+  const button=$("submitAge");button.disabled=true;showStatus("Submitting your age check securely…");
+  try{
+    const result=await send("submit",{date_of_birth:$("dob").value});
+    if(result.age_check_complete){
+      $("ageForm").hidden=true;
+      showStatus("Age check complete. Members aged 13+ can watch eligible LIVE broadcasts. Broadcasting, guest stages, and LIVE Battles require age 18+ and the other creator requirements.","ok");
+    }else showStatus("Your age check could not be confirmed. Please try again.","error");
+  }catch(error){showStatus(error.message||"The age check could not be completed.","error");}
+  finally{button.disabled=false;}
+});
+db.auth.onAuthStateChange(()=>{void boot();});
+void boot();
+</script>
+</body>
+</html>
