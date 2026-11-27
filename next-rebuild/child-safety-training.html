@@ -457,7 +457,7 @@
   q.querySelector(".feedback").textContent=ok?"Correct. That is the safer choice.":"Not quite. Review the lesson and choose the option that protects people, accounts, and evidence.";
   const out=document.getElementById("cyber-score");if(out)out.textContent=cyberScore+" of "+cyberAnswered+" answered correctly."+(cyberAnswered===12?" Quiz complete.":"");updateCertificate();
  }));
- const cyberReset=document.getElementById("cyber-reset");if(cyberReset)cyberReset.addEventListener("click",()=>{cyberScore=0;cyberAnswered=0;cyberQuizzes.forEach(q=>{delete q.dataset.done;q.querySelectorAll("button[data-choice]").forEach(b=>{b.disabled=false;b.style.borderColor=""});q.querySelector(".feedback").textContent=""});const out=document.getElementById("cyber-score");if(out)out.textContent="0 of 12 answered.";});
+ const cyberReset=document.getElementById("cyber-reset");if(cyberReset)cyberReset.addEventListener("click",()=>{cyberScore=0;cyberAnswered=0;cyberQuizzes.forEach(q=>{delete q.dataset.done;q.querySelectorAll("button[data-choice]").forEach(b=>{b.disabled=false;b.style.borderColor=""});q.querySelector(".feedback").textContent=""});const out=document.getElementById("cyber-score");if(out)out.textContent="0 of 12 answered.";updateCertificate();});
  const setupScenarioGroup=(selector,scoreId,resetId)=>{
   const group=[...document.querySelectorAll(selector)];let score=0,answered=0;
   group.forEach(q=>q.querySelectorAll("button[data-choice]").forEach(b=>b.addEventListener("click",()=>{
