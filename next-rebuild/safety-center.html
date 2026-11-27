@@ -41,21 +41,39 @@ function caseCard(c){
  try{const parsed=new URL(rawEvidenceUrl);if(parsed.protocol==="https:"&&!parsed.username&&!parsed.password)evidenceLink='<p><a class="back" href="'+esc(parsed.href)+'" target="_blank" rel="noopener noreferrer">Open reported content ↗</a></p>';}catch(_){}
  const priority=c.case_type==="child_safety"?"<span class=\"pill\">Priority child-safety review</span>":"";
  const history=Array.isArray(c.review_history)&&c.review_history.length
-  ?'<div class="warning"><b>Review history</b><ul>'+c.review_history.map(h=>'<li>'+esc(h.action.replaceAll("_"," "))+' · '+esc(h.actor_id||"Founder")+' · '+esc(new Date(h.created_at).toLocaleString())+(h.details?.note||h.details?.reason?' — '+esc(h.details.note||h.details.reason):'')+'</li>').join('')+'</ul></div>'
+  ?'<div class="warning"><b>Review history</b><ul>'+c.review_history.map(h=>'<li>'+esc(h.action.replaceAll("_"," "))+' · '+esc(h.actor_id===session?.user?.id?"Founder":"Authorized reviewer")+' · '+esc(new Date(h.created_at).toLocaleString())+(h.details?.note||h.details?.reason?' — '+esc(h.details.note||h.details.reason):'')+'</li>').join('')+'</ul></div>'
   :'<p class="muted"><small>No review actions recorded yet.</small></p>';
  return '<article class="case"><div class="casehead"><b>'+esc(c.case_type.replaceAll("_"," "))+' · '+esc(who)+'</b><span class="pill">'+esc(c.risk_level)+' / '+esc(c.status)+'</span></div>'+priority+'<small>Reported by '+esc(reporter)+' · '+esc(new Date(c.created_at).toLocaleString())+' · '+esc(c.source)+'</small><p>'+esc(c.summary)+'</p>'+evidenceLink+(c.case_type==="child_safety"?history:"")+'<div class="actions"><button class="btn secondary" data-case="'+esc(c.id)+'" data-status="monitoring">Monitor</button><button class="btn secondary" data-case="'+esc(c.id)+'" data-status="under_review">Under review</button><button class="btn secondary" data-case="'+esc(c.id)+'" data-action="protect">Protect 1 hour</button><button class="btn secondary" data-case="'+esc(c.id)+'" data-action="suspend">Suspend</button><button class="btn danger" data-case="'+esc(c.id)+'" data-action="ban">Permanent ban</button><button class="btn secondary" data-case="'+esc(c.id)+'" data-action="restore">Restore access</button><button class="btn danger" data-case="'+esc(c.id)+'" data-status="false_positive">False positive</button></div></article>';
 }
 async function loadCases(){
  setStatus("founderStatus","Loading…");
  try{
-  const [ordinary,priority]=await Promise.all([invoke({action:"list_cases"}),invoke({action:"list_child_safety_cases"})]);
-  const rank={new:0,under_review:1,monitoring:2,protected:3,resolved:4,false_positive:5};
-  const ordered=(priority.cases||[]).slice().sort((a,b)=>(rank[a.status]??6)-(rank[b.status]??6)||new Date(b.created_at)-new Date(a.created_at));
-  $("childSafetyList").innerHTML=ordered.length?ordered.map(caseCard).join(""):'<div class="empty">No child-safety reports are waiting. The priority queue is clear.</div>';
-  $("childSafetyMeta").textContent=ordered.length+" child-safety case(s) · active cases sorted first";
-  $("caseList").innerHTML=ordinary.cases.length?ordinary.cases.map(caseCard).join(""):'<div class="empty">No other safety cases are waiting.</div>';
-  setStatus("founderStatus",(ordered.length+ordinary.cases.length)+" case(s) loaded.");
- }catch(e){setStatus("founderStatus",e.message,true);$("childSafetyMeta").textContent="Priority queue unavailable."; }
+  const results=await Promise.allSettled([invoke({action:"list_child_safety_cases"}),invoke({action:"list_cases"})]);
+  const priority=results[0],ordinary=results[1];
+  let total=0,errors=[];
+  if(priority.status==="fulfilled"){
+   const rank={new:0,under_review:1,monitoring:2,protected:3,resolved:4,false_positive:5};
+   const ordered=(priority.value.cases||[]).slice().sort((a,b)=>(rank[a.status]??6)-(rank[b.status]??6)||new Date(b.created_at)-new Date(a.created_at));
+   $("childSafetyList").innerHTML=ordered.length?ordered.map(caseCard).join(""):'<div class="empty">No child-safety reports are waiting. The priority queue is clear.</div>';
+   $("childSafetyMeta").textContent=ordered.length+" child-safety case(s) · active cases sorted first";
+   total+=ordered.length;
+  }else{
+   const msg=priority.reason?.message||"The secure child-safety queue request failed.";
+   $("childSafetyMeta").textContent="Priority queue unavailable: "+msg;
+   $("childSafetyList").innerHTML='<div class="empty error">'+esc(msg)+'<br>Use Refresh cases to try again. The private queue has not been opened.</div>';
+   errors.push("Child-safety queue: "+msg);
+  }
+  if(ordinary.status==="fulfilled"){
+   const rows=ordinary.value.cases||[];
+   $("caseList").innerHTML=rows.length?rows.map(caseCard).join(""):'<div class="empty">No other safety cases are waiting.</div>';
+   total+=rows.length;
+  }else{
+   const msg=ordinary.reason?.message||"Other safety reports could not be loaded.";
+   $("caseList").innerHTML='<div class="empty error">'+esc(msg)+'</div>';
+   errors.push("Other reports: "+msg);
+  }
+  setStatus("founderStatus",errors.length?errors.join(" · "):total+" case(s) loaded.",errors.length>0);
+ }catch(e){setStatus("founderStatus",e.message,true);$("childSafetyMeta").textContent="Priority queue unavailable: "+e.message;$("childSafetyList").innerHTML='<div class="empty error">'+esc(e.message)+'</div>'; }
 }
 $("caseType").addEventListener("change",()=>{
  const type=$("caseType").value;
@@ -76,7 +94,7 @@ $("reportForm").addEventListener("submit",async e=>{
  finally{$("submitReport").disabled=false;}
 });
 $("refreshCases").addEventListener("click",loadCases);
-$("caseList").addEventListener("click",async e=>{
+async function handleCaseAction(e){
  const b=e.target.closest("button[data-case]");if(!b)return;const id=b.dataset.case;
  try{
   if(b.dataset.status){const finalDecision=["resolved","false_positive"].includes(b.dataset.status);const note=prompt(finalDecision?"Explain the review outcome (required; at least 12 characters).":"Add a review note (optional):",b.dataset.status==="false_positive"?"No Community Guidelines violation found; expression is protected.":"");if(finalDecision&&(!note||note.trim().length<12))throw new Error("A clear outcome note of at least 12 characters is required.");await invoke({action:"review_case",case_id:id,status:b.dataset.status,note:note||"Review started; no enforcement decision yet."});}
@@ -86,7 +104,9 @@ $("caseList").addEventListener("click",async e=>{
   else if(b.dataset.action==="restore"){const reason=prompt("Reason for restoring access (at least 12 characters):","Account owner completed recovery checks");if(!reason)return;await invoke({action:"restore_account",case_id:id,reason});}
   setStatus("founderStatus","Action saved and audit logged.");await loadCases();
  }catch(err){setStatus("founderStatus",err.message,true);}
-});
+}
+$("caseList").addEventListener("click",handleCaseAction);
+$("childSafetyList").addEventListener("click",handleCaseAction);
 const {data:{session:current}}=await db.auth.getSession();session=current;
 $("signedInState").textContent=session?"Signed in. Account reporting is available.":"You are signed out. Sign in through TikNation to submit a report.";
 if(session){
