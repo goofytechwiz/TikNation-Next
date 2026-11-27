@@ -107,14 +107,37 @@ async function handleCaseAction(e){
 }
 $("caseList").addEventListener("click",handleCaseAction);
 $("childSafetyList").addEventListener("click",handleCaseAction);
-const {data:{session:current}}=await db.auth.getSession();session=current;
-$("signedInState").textContent=session?"Signed in. Account reporting is available.":"You are signed out. Sign in through TikNation to submit a report.";
-if(session){
- const {data:claimsData}=await db.auth.getClaims();
- const founder=(session.user.email||"").toLowerCase()==="tiknationstudio@gmail.com"&&claimsData?.claims?.aal==="aal2";
- if(founder){$("founderPanel").classList.remove("hidden");await loadCases();}
- else if((session.user.email||"").toLowerCase()==="tiknationstudio@gmail.com"){$("founderPanel").classList.remove("hidden");$("caseList").innerHTML='<div class="empty">Complete authenticator verification before opening the Founder Safety Review.</div>';}
+async function initializeFounderPanel(nextSession){
+ session=nextSession;
+ const email=(session?.user?.email||"").trim().toLowerCase();
+ $("signedInState").textContent=session?"Signed in. Account reporting is available.":"You are signed out. Sign in through TikNation to submit a report.";
+ if(!session){
+  $("childSafetyMeta").textContent="Founder sign-in required.";
+  $("childSafetyList").innerHTML='<div class="empty">This is a private Founder-only queue. Sign in with the authorized Founder account to continue.</div>';
+  $("caseList").innerHTML='<div class="empty">Sign in to view safety reports.</div>';
+  return;
+ }
+ let claimsData=null,claimsError=null;
+ try{const claimsResult=await db.auth.getClaims();claimsData=claimsResult.data;claimsError=claimsResult.error;}catch(error){claimsError=error;}
+ const founderAccount=email==="tiknationstudio@gmail.com";
+ const founder=founderAccount&&!claimsError&&claimsData?.claims?.aal==="aal2";
+ if(founder){
+  $("founderPanel").classList.remove("hidden");
+  await loadCases();
+ }else if(founderAccount){
+  $("founderPanel").classList.remove("hidden");
+  const message=claimsError?"Your verification status could not be checked. Refresh after signing in again.":"Complete authenticator two-step verification, then refresh this page to open the private Founder queue.";
+  $("childSafetyMeta").textContent="Founder verification required.";
+  $("childSafetyList").innerHTML='<div class="empty">'+esc(message)+'</div>';
+  $("caseList").innerHTML='<div class="empty">'+esc(message)+'</div>';
+  setStatus("founderStatus","Founder two-step verification is required.",true);
+ }else{
+  $("childSafetyMeta").textContent="Founder access required.";
+  $("childSafetyList").innerHTML='<div class="empty">This queue is restricted to the authorized Founder account with completed two-step verification.</div>';
+ }
 }
-db.auth.onAuthStateChange(async(_event,next)=>{session=next;});
+const {data:{session:current}}=await db.auth.getSession();
+await initializeFounderPanel(current);
+db.auth.onAuthStateChange((_event,next)=>{void initializeFounderPanel(next);});
 })();
 </script></body></html>
