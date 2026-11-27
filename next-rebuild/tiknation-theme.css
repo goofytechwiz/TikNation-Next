@@ -1,0 +1,111 @@
+/* TikNation unified visual system — shared across the app, LIVE, and account pages. */
+:root{
+ --tn-night:#080817;--tn-panel:#15152f;--tn-panel-2:#20183d;--tn-line:#ffffff24;
+ --tn-cyan:#70f5ee;--tn-blue:#67a9ff;--tn-violet:#ad8cff;--tn-pink:#ff79c8;
+ --tn-coral:#ff8f87;--tn-gold:#ffd36f;--tn-mint:#82f5c8;--tn-ink:#fbf9ff;--tn-muted:#b9b4d2;
+}
+html{color-scheme:dark;scroll-behavior:smooth}
+body{
+ color:var(--tn-ink)!important;
+ background:
+  radial-gradient(ellipse at 8% 0%,#17617a55 0,transparent 35%),
+  radial-gradient(ellipse at 92% 12%,#792c8050 0,transparent 36%),
+  radial-gradient(ellipse at 50% 100%,#35216a40 0,transparent 45%),
+  linear-gradient(145deg,#070817,#100d25 54%,#090d20)!important;
+}
+body:before{
+ opacity:.22!important;
+ background-image:radial-gradient(#fff 1px,transparent 1.5px),radial-gradient(#9e8cff 1px,transparent 1.5px)!important;
+ background-size:47px 47px,83px 83px!important;background-position:0 0,21px 37px!important;
+}
+a{color:var(--tn-cyan)}
+button,.btn,.action,.pill,.navbtn,.choice,.live-gift-choice{
+ transition:transform .2s ease,border-color .2s ease,box-shadow .2s ease,filter .2s ease,background .2s ease;
+}
+button:hover:not(:disabled),.btn:hover:not(:disabled),.action:hover,.pill:hover,.navbtn:hover,.choice:hover,.live-gift-choice:hover:not(:disabled){
+ transform:translateY(-2px);filter:brightness(1.08);
+}
+button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible{
+ outline:2px solid var(--tn-cyan)!important;outline-offset:3px!important;
+}
+input,textarea,select,.field input,.field textarea,.field select{
+ border-color:#9d8cff55!important;background-color:#0b0b20!important;color:var(--tn-ink)!important;
+}
+input:focus,textarea:focus,select:focus,.field input:focus,.field textarea:focus,.field select:focus{
+ border-color:var(--tn-cyan)!important;box-shadow:0 0 0 3px #70f5ee1c,0 0 22px #70f5ee15!important;
+}
+.card,.panel,.tile,.case,.control-group,.stream,.live-gifts,.settings-row,.account-empty{
+ border-color:var(--tn-line)!important;
+ box-shadow:0 16px 45px #03030e55,0 0 25px #9e8cff0b;
+}
+.card,.panel,.tile,.case,.control-group,.stream{
+ background:linear-gradient(145deg,#1a1a39ed,#17132fe8 60%,#10253aee)!important;
+}
+.top{
+ background:linear-gradient(100deg,#080817f2,#17102bf0 55%,#0b1d2bf2)!important;
+ border-bottom:1px solid #a58aff45!important;backdrop-filter:blur(22px);
+ box-shadow:0 10px 32px #03020c77;
+}
+.brandmark,.brandmark:before{
+ box-shadow:0 0 25px #70f5ee55,0 0 52px #ad8cff3a!important;
+}
+.brandmark{animation:tnGlow 5s ease-in-out infinite}
+.brand small,.sub,.muted,.small,.fine{color:var(--tn-muted)!important}
+.primary,.btn:not(.secondary):not(.danger),.action.primary{
+ color:#100d27!important;
+ background:linear-gradient(105deg,var(--tn-cyan),var(--tn-blue) 28%,var(--tn-violet) 62%,var(--tn-pink))!important;
+ border:1px solid #ffffff88!important;
+ box-shadow:0 8px 25px #7e72ff30,0 0 22px #70f5ee20!important;
+}
+.btn.secondary,.btn.ghost,.ghost,.pill,.navbtn,.action:not(.primary){
+ color:var(--tn-ink)!important;border:1px solid #a58aff45!important;
+ background:linear-gradient(135deg,#ffffff0c,#a58aff0c)!important;
+}
+.danger,.btn.danger{background:linear-gradient(110deg,#70233f,#b52c59)!important;color:#fff!important;border-color:#ff8da866!important}
+.hero,.home-hero{
+ border-color:#b6a2ff55!important;
+ box-shadow:inset 0 0 80px #9a7cff13,0 18px 55px #03030e66,0 0 30px #70f5ee12!important;
+}
+.hero h1,.home-greeting{
+ filter:drop-shadow(0 0 22px #a58aff30);
+}
+.section-head h2,.home-section-heading h2{color:var(--tn-ink)}
+.navbtn.active,.mobilebar button.active{
+ border-color:#70f5ee55!important;color:#fff!important;
+ background:linear-gradient(110deg,#70f5ee20,#ad8cff22,#ff79c815)!important;
+ box-shadow:inset 0 0 22px #70f5ee0d,0 0 18px #ad8cff17;
+}
+.mobilebar{
+ background:linear-gradient(100deg,#080817f7,#17102bf7 55%,#0b1d2bf7)!important;
+ border-bottom:1px solid #a58aff55!important;box-shadow:0 10px 28px #03020c88!important;
+}
+.top-actions .tn-utility,.top-actions .tn-account{
+ min-width:44px;min-height:44px;display:inline-flex;align-items:center;justify-content:center;gap:7px;
+ border-radius:15px!important;font-size:18px!important;padding:8px 12px!important;
+}
+.tn-icon{display:inline-grid;place-items:center;font-size:20px;line-height:1;filter:drop-shadow(0 0 7px #ad8cff55)}
+.tn-live-mark{display:inline-flex;align-items:center;gap:6px;color:#ff667f!important;font-weight:950;letter-spacing:.08em}
+.tn-live-mark:before{content:"";width:9px;height:9px;border-radius:50%;background:#ff405f;box-shadow:0 0 8px #ff405f,0 0 17px #ff405f;animation:tnLivePulse 1.3s infinite}
+.tn-profile-button{width:44px;height:44px;padding:3px!important;border-radius:50%!important;border:2px solid transparent!important;background:linear-gradient(135deg,var(--tn-cyan),var(--tn-violet),var(--tn-pink)) border-box!important;box-shadow:0 0 18px #ad8cff55}
+.tn-profile-image,.tn-profile-fallback{width:100%;height:100%;border-radius:50%;object-fit:cover;display:grid;place-items:center;background:#242044;color:white;font-weight:900}
+.tn-profile-image[hidden]{display:none}
+.tn-profile-fallback{font-size:17px}
+.video{border-color:#9b83ff66!important;box-shadow:inset 0 0 60px #080817aa,0 0 30px #ad8cff1c}
+.live-dot{color:#ff536e!important;text-shadow:0 0 12px #ff536e88}
+.live-gifts{background:linear-gradient(145deg,#1c1435,#0b1830)!important;border-color:#a58aff55!important}
+.live-gift-choice{border-color:#7866b555!important;background:linear-gradient(145deg,#20183e,#10182e)!important}
+.live-gift-choice:hover:not(:disabled){border-color:var(--tn-cyan)!important;box-shadow:0 10px 28px #70f5ee20!important}
+.status,.toast{backdrop-filter:blur(16px)}
+.toast{background:linear-gradient(100deg,var(--tn-cyan),#d9c0ff,var(--tn-pink))!important;color:#130f2b!important}
+@keyframes tnGlow{0%,100%{filter:saturate(1);transform:rotate(0)}50%{filter:saturate(1.35);transform:rotate(3deg)}}
+@keyframes tnLivePulse{0%,100%{opacity:1;box-shadow:0 0 7px #ff405f}50%{opacity:.55;box-shadow:0 0 16px #ff405f}}
+@media(max-width:800px){
+ .top-actions .tn-utility,.top-actions .tn-account{display:inline-flex!important}
+ .top-actions{gap:5px!important}
+ .top-actions .tn-utility,.top-actions .tn-account{min-width:38px;min-height:38px;padding:6px!important}
+ .top-actions .utility-label{display:none!important}
+ .top-actions .tn-profile-button{width:40px;height:40px;padding:3px!important}
+}
+@media(prefers-reduced-motion:reduce){
+ *,*:before,*:after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
+}
