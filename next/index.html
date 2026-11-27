@@ -903,6 +903,27 @@ loadTikSettings();
 @media(max-width:380px){.tn-home-actions{display:grid}.tn-home-primary,.tn-home-secondary{width:100%}.tn-world-card{padding:13px}.tn-world-card b{font-size:14px}}
 @media(prefers-reduced-motion:reduce){.tn-home-portal span{animation:none}.tn-launch-card,.tn-world-card{transition:none}}
 </style>
+<style id="tn-living-controls-v2">
+/* Final high-priority dimensional button treatment */
+.tn-main-nav .navbtn,.top-actions .tn-utility,.top-actions .tn-account,.tn-world-card,.home-interest,.quick-card,.action,.pill,.discover-chip,.tn-home-primary,.tn-home-secondary,.tn-launch-card,.studio-actions button,.tn-world-actions button{
+ position:relative!important;isolation:isolate!important;transform:translateY(0)!important;border:1px solid rgba(255,255,255,.3)!important;
+ box-shadow:0 7px 0 rgba(4,3,18,.62),0 14px 26px rgba(0,0,0,.42),inset 0 1px 0 rgba(255,255,255,.35)!important;
+ transition:transform .17s ease,box-shadow .17s ease,filter .17s ease,border-color .17s ease!important;-webkit-tap-highlight-color:transparent
+}
+.tn-main-nav .navbtn:hover,.top-actions .tn-utility:hover,.top-actions .tn-account:hover,.tn-world-card:hover,.home-interest:hover,.quick-card:hover,.action:hover,.pill:hover,.discover-chip:hover,.tn-home-primary:hover,.tn-home-secondary:hover,.tn-launch-card:hover,.studio-actions button:hover,.tn-world-actions button:hover{
+ transform:translateY(-4px) scale(1.02)!important;box-shadow:0 11px 0 rgba(4,3,18,.52),0 20px 35px rgba(0,0,0,.45),0 0 26px rgba(114,245,237,.3),inset 0 1px 0 rgba(255,255,255,.45)!important;border-color:#72f5ed!important;filter:brightness(1.12) saturate(1.2)!important
+}
+.tn-main-nav .navbtn:active,.top-actions .tn-utility:active,.top-actions .tn-account:active,.tn-world-card:active,.home-interest:active,.quick-card:active,.action:active,.pill:active,.discover-chip:active,.tn-home-primary:active,.tn-home-secondary:active,.tn-launch-card:active,.studio-actions button:active,.tn-world-actions button:active{
+ transform:translateY(4px) scale(.97)!important;box-shadow:0 1px 0 rgba(4,3,18,.65),0 3px 8px rgba(0,0,0,.32),inset 0 3px 9px rgba(0,0,0,.25)!important;filter:brightness(1.15) saturate(1.2)!important
+}
+.tn-main-nav .navbtn:before,.top-actions .tn-utility:before,.top-actions .tn-account:before,.tn-world-card:before,.home-interest:before,.quick-card:before,.action:before,.pill:before,.discover-chip:before,.tn-home-primary:before,.tn-home-secondary:before,.tn-launch-card:before,.studio-actions button:before,.tn-world-actions button:before{
+ content:""!important;position:absolute!important;inset:0!important;z-index:-1!important;pointer-events:none!important;border-radius:inherit!important;background:linear-gradient(145deg,#ffffff35,transparent 46%,#0002)!important
+}
+.tn-main-nav .navbtn.active,.discover-chip.active{border-color:#8dfaf0!important;box-shadow:0 5px 0 #04031288,0 0 25px #72f5ed66,inset 0 1px 0 #ffffff88!important}
+.tn-main-nav .tn-nav-create,.tn-home-primary{background:linear-gradient(110deg,#72f5ed,#a58aff 55%,#ff76c8)!important;color:#15102b!important;box-shadow:0 8px 0 #04031299,0 15px 32px #a58aff77,inset 0 1px 0 #ffffffcc!important}
+.tn-main-nav .navbtn:focus-visible,.top-actions .tn-utility:focus-visible,.tn-world-card:focus-visible,.home-interest:focus-visible,.action:focus-visible,.discover-chip:focus-visible{outline:2px solid #8dfaf0!important;outline-offset:4px!important}
+@media(prefers-reduced-motion:reduce){.tn-main-nav .navbtn,.top-actions .tn-utility,.top-actions .tn-account,.tn-world-card,.home-interest,.quick-card,.action,.pill,.discover-chip,.tn-home-primary,.tn-home-secondary,.tn-launch-card{transition:none!important}}
+</style>
 </body></html>
 <style>
 /* COLOR & WONDER PASS — brighter accents, playful motion, and a visible safety path */
