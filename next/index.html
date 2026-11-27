@@ -516,7 +516,7 @@ button:hover,.action:hover,.pill:hover,.quick-card:hover{filter:brightness(1.12)
 <button class="navbtn active" data-view="home" onclick="navigate('home')"><b>⌂</b> Home</button><button class="navbtn" data-view="discover" onclick="navigate('discover')"><b>⌕</b> Discover</button><button class="navbtn" data-view="live" onclick="(window.location.href='./live-worlds.html')"><b>◉</b> Live Worlds</button><a class="navbtn" href="../next-rebuild/synthetic-camera-studio.html"><b>✧</b> Creation Portal</a><button class="navbtn" data-view="community" onclick="navigate('community')"><b>◎</b> Community</button><button class="navbtn" data-view="profile" onclick="navigate('profile')"><b>◌</b> Profile</button><a class="navbtn" href="../next-rebuild/safety-center.html"><b>🛡</b> Safety Center</a><a class="navbtn" href="../next-rebuild/child-safety-command-center.html"><b>⌘</b> Safety Command Center</a><div class="side-note">✨ <b style="color:white">A universe of creators.</b><br><br>Watch first. Follow if you want. Your next idea starts here.</div></aside>
 <main class="main">
 <section class="view active" id="view-home">
-<div class="home-hero"><div class="hero-orbit orbit-a"></div><div class="hero-orbit orbit-b"></div><div class="portal-art" aria-hidden="true"><div class="portal-halo halo-outer"></div><div class="portal-halo halo-middle"></div><div class="portal-halo halo-inner"></div><div class="portal-core"><span>✦</span></div><div class="portal-orbit orbit-one"><i>✧</i></div><div class="portal-orbit orbit-two"><i>✦</i></div><div class="portal-orbit orbit-three"><i>✧</i></div><div class="portal-star star-a">✦</div><div class="portal-star star-b">✧</div><div class="portal-star star-c">✦</div></div><div class="hero-spark">✦</div><div class="cosmic-ring ring-three"></div><div class="hero-energy energy-one"></div><div class="hero-energy energy-two"></div><div class="home-hero-copy"><div class="eyebrow"><span class="status-dot"></span> YOUR UNIVERSE IS OPEN</div><div class="home-greeting">WELCOME TO<br><span>YOUR UNIVERSE.</span></div><p>A world of possibilities. Discover creators, step into live moments, and turn the ideas in your imagination into something real.</p><div class="actions"><button class="action primary" onclick="navigate('discover')">Discover creators&nbsp; ↗</button><a class="action" href="../next-rebuild/synthetic-camera-studio.html">＋ Create something</a></div></div><div class="hero-bottom-label">TIKNATION <span>·</span> YOUR VOICE. YOUR WORLD.</div></div>
+<div class="home-hero"><div class="hero-orbit orbit-a"></div><div class="hero-orbit orbit-b"></div><div class="portal-art" aria-hidden="true"><div class="portal-halo halo-outer"></div><div class="portal-halo halo-middle"></div><div class="portal-halo halo-inner"></div><div class="portal-core"><span>✦</span></div><div class="portal-orbit orbit-one"><i>✧</i></div><div class="portal-orbit orbit-two"><i>✦</i></div><div class="portal-orbit orbit-three"><i>✧</i></div><div class="portal-star star-a">✦</div><div class="portal-star star-b">✧</div><div class="portal-star star-c">✦</div></div><div class="hero-spark">✦</div><div class="cosmic-ring ring-three"></div><div class="hero-energy energy-one"></div><div class="hero-energy energy-two"></div><div class="home-hero-copy"><div class="eyebrow"><span class="status-dot"></span> YOUR UNIVERSE IS OPEN</div><div class="home-greeting">WELCOME TO<br><span>YOUR UNIVERSE.</span></div><p>A world of possibilities. Discover creators, step into live moments, and turn the ideas in your imagination into something real.</p><div class="actions"><button class="action primary" onclick="navigate('discover')">Discover creators&nbsp; ↗</button><a class="action create-cta" href="../next-rebuild/synthetic-camera-studio.html"><span aria-hidden="true">✧</span> Create something <span aria-hidden="true">↗</span></a></div></div><div class="hero-bottom-label">TIKNATION <span>·</span> YOUR VOICE. YOUR WORLD.</div></div>
 <div class="home-quick"><button class="quick-card quick-live" onclick="(window.location.href='./live-worlds.html')"><span class="quick-icon">◉</span><span><b>Live Worlds</b><small>Step into the moment</small></span><span class="quick-arrow">↗</span></button><a class="quick-card quick-create" href="../next-rebuild/synthetic-camera-studio.html"><span class="quick-icon">✧</span><span><b>Creation Portal</b><small>Bring an idea to life</small></span><span class="quick-arrow">↗</span></a><button class="quick-card quick-discover" onclick="navigate('discover')"><span class="quick-icon">⌕</span><span><b>Discover</b><small>Meet your next favorite</small></span><span class="quick-arrow">↗</span></button></div>
 <div class="home-trust-panel"><div class="trust-orb" aria-hidden="true">🛡️</div><div class="trust-copy"><div class="trust-kicker">SAFETY &amp; TRUST</div><h2>Your space. Your boundaries.</h2><p>Explore safety resources, reporting guidance, and ways to manage your TikNation experience.</p></div><a class="trust-action" href="../next-rebuild/safety-center.html">Visit Safety Center <span aria-hidden="true">↗</span></a></div>
 <section class="home-section home-discovery">
@@ -729,4 +729,25 @@ loadTikSettings();
 @media(max-width:800px){.home-interest-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.home-creator-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:480px){.home-creator-grid{grid-template-columns:1fr}.home-interest{min-height:118px;padding:14px}.home-section-heading{align-items:flex-start;flex-direction:column}}
 @media(prefers-reduced-motion:reduce){.home-interest{transition:none}.home-interest:hover{transform:none}}
+
+/* MAKE THE SECONDARY HERO CREATE ACTION CLEAR AND EASY TO FIND */
+.home-hero .actions .create-cta{
+ display:inline-flex!important;align-items:center;justify-content:center;gap:9px;
+ min-height:50px;padding:14px 20px!important;
+ color:#100d25!important;-webkit-text-fill-color:#100d25!important;
+ font-weight:900!important;font-size:15px!important;letter-spacing:.01em;
+ text-decoration:none!important;
+ background:linear-gradient(105deg,#8dfaf0 0%,#b8a5ff 58%,#ff9bd5 100%)!important;
+ border:1px solid #ffffffb8!important;border-radius:14px!important;
+ box-shadow:0 8px 26px #0005,0 0 24px #72f5ed44,0 0 36px #a58aff30!important;
+ text-shadow:none!important;opacity:1!important;
+}
+.home-hero .actions .create-cta span{font-size:17px;color:#21163d}
+.home-hero .actions .create-cta:hover{
+ transform:translateY(-2px);filter:brightness(1.08);
+ box-shadow:0 11px 30px #0006,0 0 30px #72f5ed66,0 0 42px #a58aff44!important;
+}
+.home-hero .actions .create-cta:focus-visible{outline:3px solid #fff;outline-offset:4px}
+@media(max-width:800px){.home-hero .actions .create-cta{min-height:48px;padding:13px 16px!important;font-size:14px!important}}
+@media(prefers-reduced-motion:reduce){.home-hero .actions .create-cta{transition:none!important}}
 </style>
