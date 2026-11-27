@@ -563,6 +563,24 @@ button:disabled{opacity:.55;cursor:not-allowed;filter:saturate(.55)}
 #view-settings .settings-group .settings-row{padding:14px 0}
 @media(max-width:650px){#view-settings .settings-list{grid-template-columns:1fr}#view-settings .settings-group{padding:17px}}
 </style>
+
+<style id="settings-button-layout">
+#view-settings .settings-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;background:transparent;border:0;padding:0;margin:18px 0}
+#view-settings .settings-group{min-width:0;padding:20px;border:1px solid #9b8cff48;border-radius:22px;background:linear-gradient(145deg,#14243bea,#211438f2);box-shadow:0 14px 38px #0005}
+#view-settings .settings-group h3{margin:0 0 12px;font-size:18px;color:#e9e4ff}
+#view-settings .settings-group>p{margin:0 0 14px}
+#view-settings .settings-row{display:flex;justify-content:space-between;align-items:center;gap:14px;width:100%;min-height:76px;padding:15px 16px;margin:10px 0;border:1px solid #ffffff20;border-radius:16px;background:linear-gradient(120deg,#ffffff0c,#8f79ff12);box-shadow:0 7px 18px #0003;transition:transform .18s ease,border-color .18s ease,box-shadow .18s ease}
+#view-settings .settings-row b{display:block;font-size:15px}
+#view-settings .settings-row small{display:block;color:var(--muted);margin-top:4px;line-height:1.4}
+#view-settings .settings-group>a.action{display:flex;align-items:center;justify-content:space-between;width:100%;min-height:54px;padding:13px 16px;margin:10px 0 0;border:1px solid #8c82ff55;border-radius:15px;background:linear-gradient(110deg,#164b65,#433078,#602c67);box-shadow:0 8px 20px #0004;color:#fff;text-decoration:none;font-weight:750;transition:transform .18s ease,box-shadow .18s ease,border-color .18s ease}
+#view-settings .settings-group>a.action:after{content:"↗";margin-left:10px;color:#a9fff7}
+#view-settings .settings-group>a.action:hover,#view-settings .settings-row:focus-within{transform:translateY(-2px);border-color:#83f4f0;box-shadow:0 12px 28px #42dce633,0 0 0 1px #9b8cff44}
+#view-settings .settings-account{border:1px solid #9b8cff48;border-radius:22px;background:linear-gradient(145deg,#14243bea,#211438f2);box-shadow:0 14px 38px #0005;padding:20px}
+#view-settings .settings-account .action{min-height:48px;padding:11px 16px;margin:7px 7px 0 0;border-radius:14px;box-shadow:0 7px 18px #0004}
+@media(hover:hover){#view-settings .settings-row:hover{transform:translateY(-2px);border-color:#83f4f0;box-shadow:0 12px 28px #42dce633}}
+@media(max-width:650px){#view-settings .settings-list{grid-template-columns:1fr}#view-settings .settings-group{padding:16px}#view-settings .settings-account .action{width:100%;margin:8px 0 0}}
+@media(prefers-reduced-motion:reduce){#view-settings .settings-row,#view-settings .settings-group>a.action{transition:none}}
+</style>
 </head>
 <body><div class="shell">
 <header class="top"><div class="brand"><div class="brandmark">✦</div><div>TikNation<small>YOUR VOICE. YOUR WORLD.</small></div></div><div class="top-actions"><button class="pill tn-utility" aria-label="Messages" title="Messages" onclick="navigate('messages')"><span class="tn-icon" aria-hidden="true">📬</span><span class="utility-label">Messages</span></button><button class="pill tn-utility" aria-label="Notifications" title="Notifications" onclick="navigate('notifications')"><span class="tn-icon" aria-hidden="true">🔔</span><span class="utility-label">Notifications</span></button><button id="tnProfileButton" class="pill tn-account tn-profile-button" aria-label="Profile" title="Profile" onclick="navigate('profile')"><img id="tnProfileImage" class="tn-profile-image" alt="" hidden><span id="tnProfileFallback" class="tn-profile-fallback" aria-hidden="true">◉</span></button><button class="pill tn-account" aria-label="Settings" title="Settings" onclick="navigate('settings')"><span class="tn-icon" aria-hidden="true">⚙</span><span class="utility-label">Settings</span></button><button class="action primary" onclick="navigate('create')">✧ Create</button></div></header>
