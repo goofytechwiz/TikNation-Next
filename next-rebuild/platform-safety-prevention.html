@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#080716">
+<meta name="description" content="TikNation Platform Safety & Prevention: a transparent guide to existing protections, limitations, and the next enforcement work.">
+<title>TikNation · Platform Safety &amp; Prevention</title>
+<style>
+:root{color-scheme:dark;--bg:#080716;--panel:#15152d;--line:#ffffff24;--cyan:#72f5ed;--violet:#b99aff;--pink:#ff82c8;--gold:#ffd978;--muted:#c5c0d8}
+*{box-sizing:border-box}body{margin:0;padding:18px;color:#fff;font:15px/1.65 system-ui,-apple-system,Segoe UI,sans-serif;background:radial-gradient(ellipse at 8% 0,#174e6a 0,transparent 34%),radial-gradient(ellipse at 94% 10%,#54265f 0,transparent 35%),var(--bg)}
+main{max-width:1000px;margin:20px auto 60px}.hero{position:relative;overflow:hidden;padding:clamp(24px,5vw,48px);border:1px solid #9b8cff55;border-radius:26px;background:radial-gradient(ellipse at 90% 10%,#8b63ff2c,transparent 40%),linear-gradient(130deg,#13223a,#1c1736 65%,#102d3a);box-shadow:0 22px 65px #0006}
+.kicker{color:var(--cyan);font-size:10px;font-weight:950;letter-spacing:2.5px}.hero h1{font-size:clamp(36px,7vw,62px);line-height:1.02;letter-spacing:-.05em;margin:14px 0;background:linear-gradient(100deg,#fff,var(--cyan),var(--violet),var(--pink));color:transparent;background-clip:text}.hero p{max-width:740px;color:#d7d2e9}.back{display:inline-block;margin:8px 12px 0 0;color:var(--cyan);font-weight:800;text-decoration:none}
+.card{margin:16px 0;padding:21px;border:1px solid var(--line);border-radius:20px;background:linear-gradient(145deg,#18223bee,#1c1532ee);box-shadow:0 14px 40px #0004}.card h2{margin:0 0 8px;font-size:21px}.muted{color:var(--muted)}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.grid .card{margin:0}.status{display:inline-block;padding:4px 9px;border-radius:99px;font-size:10px;font-weight:950;letter-spacing:.6px;border:1px solid #72f5ed77;color:#a8fff4;background:#72f5ed12}.partial{border-color:#ffd97888;color:#ffe6a8;background:#ffd97812}.planned{border-color:#ff82c888;color:#ffc1df;background:#ff82c812}
+ul{padding-left:21px}li{margin:7px 0}.notice{padding:14px 16px;border-left:3px solid var(--gold);border-radius:0 12px 12px 0;background:#ffd97812;color:#f5e6b8}.danger{border-left-color:var(--pink);background:#ff82c812;color:#ffd5e7}.links{display:flex;gap:10px;flex-wrap:wrap}.btn{display:inline-flex;align-items:center;justify-content:center;padding:11px 15px;border:1px solid #72f5ed77;border-radius:12px;background:linear-gradient(110deg,#17485b,#38316d);color:#fff;text-decoration:none;font-weight:850}.btn:hover,.btn:focus-visible{outline:2px solid #fff;outline-offset:2px;filter:brightness(1.15)}.small{font-size:12px;color:var(--muted)}
+@media(max-width:680px){body{padding:12px}.grid{grid-template-columns:1fr}.card{padding:17px}.hero{border-radius:21px}.hero h1{font-size:42px}}
+@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
+</style>
+<link rel="stylesheet" href="./tiknation-theme.css?v=20261126-magical-system">
+</head>
+<body><main>
+<header class="hero">
+<div class="kicker">✦ TIKNATION · TRUST, SAFETY &amp; ACCOUNTABILITY</div>
+<h1>Platform Safety<br>&amp; Prevention</h1>
+<p>Safety is more than a promise or a training course. It depends on product controls, clear reporting routes, accountable review, and regular testing. This page separates what the current project code documents from protections that still need implementation or end-to-end verification.</p>
+<a class="back" href="safety-center.html">← Safety Center</a><a class="back" href="child-safety-training.html">Safety Academy</a>
+</header>
+
+<section class="card">
+<h2>How to read this status</h2>
+<p><span class="status">PRESENT IN PROJECT</span> means the current repository contains the page or code described. It does not automatically prove that every production path works.</p>
+<p><span class="status partial">PARTIAL / LIMITED</span> means a control exists but has an important limitation or incomplete coverage.</p>
+<p><span class="status planned">NEEDS TESTING OR IMPLEMENTATION</span> means we must not present it as a working protection yet.</p>
+<div class="notice"><strong>Important:</strong> This is a source-based project review, not a penetration test, legal certification, independent age-verification audit, or proof that every backend policy is correctly configured. We will only upgrade a status after inspecting and testing the actual control.</div>
+</section>
+
+<section class="grid">
+<article class="card"><span class="status partial">PARTIAL / LIMITED</span><h2>1 · Age protection</h2>
+<p>The project has a signed-in age-check page that sends a date of birth to a server-side age-assurance function. The page itself explicitly describes the date of birth as self-declared—not independent identity verification.</p>
+<ul><li>Project policy: members 13+ may watch eligible LIVE broadcasts.</li><li>Broadcasting, guest stages, and LIVE Battles are restricted to adults 18+ and additional creator requirements.</li><li>Stronger age assurance may still be needed for sensitive features.</li></ul>
+<p class="small">Next: verify server-side age decisions, bypass resistance, account recovery behavior, and enforcement on every LIVE entry point.</p>
+<a class="btn" href="age-check.html">Open Age Check ↗</a></article>
+
+<article class="card"><span class="status">PRESENT IN PROJECT</span><h2>2 · Blocking &amp; direct-message boundaries</h2>
+<p>The Privacy Center includes account blocking and describes database-level protections for blocked accounts. It also states that the “Who can message me” preference is enforced by database access rules, including block checks.</p>
+<ul><li>Members can manage blocked accounts from the Privacy Center.</li><li>Message permissions include everyone, followers, people followed, or nobody.</li><li>Private-account and follow-request protections are described as database-level controls.</li></ul>
+<p class="small">Next: test both directions, alternate endpoints, existing conversations, guest/live interactions, and attempts to bypass a block.</p>
+<a class="btn" href="privacy-center.html">Open Privacy Center ↗</a></article>
+
+<article class="card"><span class="status partial">PARTIAL / LIMITED</span><h2>3 · Privacy preferences</h2>
+<p>Privacy settings can be saved to an account, but the Privacy Center explicitly warns that several controls are not enforced consistently across every feature.</p>
+<ul><li>Comment audience, tags, downloads, reposts, and remix choices need enforcement coverage.</li><li>Spam-filter preferences are not yet enforced platform-wide.</li><li>Hidden words and restricted-account lists exist, but automated behavior is not yet connected across all surfaces.</li></ul>
+<p class="small">Next: enforce each preference at the database/API boundary and test all relevant surfaces before calling it protective.</p>
+<a class="btn" href="privacy-center.html">Review Privacy Controls ↗</a></article>
+
+<article class="card"><span class="status partial">INTERFACE PRESENT · VERIFY END TO END</span><h2>4 · Reporting &amp; human review</h2>
+<p>The Safety Center contains a private report form and a restricted Founder safety-review interface, including a priority child-safety queue. The page describes human review and proportional action; this source inspection alone does not prove every submission, notification, and review path works reliably.</p>
+<ul><li>Reports are allegations, not proof.</li><li>Child-safety concerns should be prioritized for prompt review.</li><li>Do not upload or link sexual images or videos involving minors.</li><li>Do not rely on a platform report for an emergency; contact emergency services when someone is in immediate danger.</li></ul>
+<p class="small">Next: test report creation, safe evidence handling, queue permissions, audit history, notifications, retention, and appeals.</p>
+<a class="btn" href="safety-center.html#reportForm">Open Safety Report Form ↗</a></article>
+
+<article class="card"><span class="status partial">POLICY &amp; TRAINING PRESENT</span><h2>5 · Moderation &amp; LIVE safety</h2>
+<p>TikNation has community rules, moderator training, and a LIVE moderation guidance page. Written guidance is not a substitute for tested moderator permissions and working in-stream controls.</p>
+<ul><li>Review moderator access by role and least privilege.</li><li>Test mute, remove, block, report, guest removal, and stream interruption.</li><li>Record moderator actions and provide an appeal route.</li></ul>
+<p class="small">Next: verify each control in a real test session using separate viewer, creator, moderator, and Founder accounts.</p>
+<div class="links"><a class="btn" href="live-moderation.html">LIVE Moderation ↗</a><a class="btn" href="moderator-training.html">Moderator Training ↗</a></div></article>
+
+<article class="card"><span class="status partial">AVAILABLE · VERIFY COVERAGE</span><h2>6 · Account security</h2>
+<p>The project links to two-step verification, session activity, account recovery, and security tools. Their presence does not establish that every account is enrolled or that all security flows are complete.</p>
+<ul><li>Encourage two-step verification, especially for privileged accounts.</li><li>Review sessions and revoke unfamiliar sessions.</li><li>Protect Founder and moderator roles with strong authentication.</li><li>Test recovery without weakening account protections.</li></ul>
+<div class="links"><a class="btn" href="security.html">Security Settings ↗</a><a class="btn" href="session-activity.html">Session Activity ↗</a></div></article>
+</section>
+
+<section class="card">
+<h2>What we should build and verify next</h2>
+<ol>
+<li><strong>Age enforcement audit:</strong> verify the age-assurance function and all viewer, creator, guest-stage, and battle entry points.</li>
+<li><strong>Reporting reliability:</strong> submit controlled test reports, confirm Founder-only access, verify audit history, and test appeals.</li>
+<li><strong>LIVE safety test:</strong> exercise moderator tools with separate test accounts and confirm they work during an active broadcast.</li>
+<li><strong>Privacy enforcement:</strong> map every saved preference to the database/API rule that enforces it; remove or label any preference that is not active.</li>
+<li><strong>Abuse resistance:</strong> test block evasion, repeated unwanted contact, spam bursts, impersonation, and attempts to contact restricted accounts.</li>
+<li><strong>Ongoing review:</strong> keep a dated test log, fix failures, and publish only statistics backed by actual platform records.</li>
+</ol>
+<div class="notice danger"><strong>Never describe an untested feature as child protection.</strong> We should not launch or promote a safety control as effective until it has been tested against realistic misuse and bypass attempts.</div>
+</section>
+
+<section class="card">
+<h2>Safety resources</h2>
+<div class="links">
+<a class="btn" href="safety-center.html">Safety Center ↗</a>
+<a class="btn" href="child-safety-standards.html">Child Safety Standards ↗</a>
+<a class="btn" href="community-guidelines.html">Community Guidelines ↗</a>
+<a class="btn" href="parents.html">Parent &amp; Guardian Resources ↗</a>
+<a class="btn" href="child-safety-training.html">Safety Academy ↗</a>
+</div>
+</section>
+<p class="small">TikNation · Platform Safety &amp; Prevention · Status descriptions are based on the project source reviewed for this page and should be refreshed after each implementation and test cycle.</p>
+</main></body></html>
