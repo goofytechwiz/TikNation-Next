@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#080719">
+<title>Creator Workspace · TikNation</title>
+<link rel="stylesheet" href="./tiknation-theme.css?v=20261127-workspace">
+<style>
+:root{color-scheme:dark;--bg:#080719;--panel:#15132a;--ink:#f7f5ff;--muted:#aaa6c7;--cyan:#72f5ed;--pink:#ff76c8;--violet:#a58aff;--line:#ffffff20}
+*{box-sizing:border-box}body{margin:0;min-height:100vh;background:radial-gradient(ellipse at 12% 0%,#29205a 0,transparent 38%),radial-gradient(ellipse at 95% 15%,#35164b 0,transparent 30%),var(--bg);color:var(--ink);font:15px/1.5 Inter,system-ui,-apple-system,Segoe UI,sans-serif}
+a{color:var(--cyan);text-decoration:none}.shell{max-width:1120px;margin:auto;padding:18px 16px 56px}.top{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;padding:10px 0 18px;border-bottom:1px solid var(--line)}.brand{font-weight:900;letter-spacing:.04em}.brand span{color:var(--cyan)}.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:1px solid var(--line);border-radius:13px;padding:10px 14px;color:var(--ink);background:#ffffff0b;font:inherit;font-weight:750;cursor:pointer}.btn.primary{border:0;color:#101020;background:linear-gradient(100deg,var(--cyan),var(--violet),var(--pink));box-shadow:0 8px 24px #8f78ff38}.hero{padding:25px 0 16px}.eyebrow{font-size:11px;letter-spacing:.18em;color:var(--cyan);font-weight:850}.hero h1{font-size:clamp(30px,5vw,46px);line-height:1.08;margin:7px 0}.muted{color:var(--muted)}.status{min-height:24px;margin:10px 0;color:var(--muted);font-size:13px}.status.error{color:#ff9fb8}.grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}.panel{min-width:0;border:1px solid var(--line);border-radius:20px;padding:18px;background:linear-gradient(145deg,#ffffff0c,#ffffff03);box-shadow:0 14px 34px #0003}.panel h2{margin:0;font-size:20px}.panel>p{margin:5px 0 16px;color:var(--muted);font-size:13px}.field{display:grid;gap:6px;margin:12px 0}.field label{font-weight:750;font-size:12px;color:#d8d2ef}.field input,.field textarea,.field select{width:100%;min-width:0;border:1px solid #ffffff25;border-radius:12px;padding:12px;background:#090817;color:var(--ink);font:inherit}.field textarea{min-height:118px;resize:vertical}.field input:focus,.field textarea:focus,.field select:focus{outline:2px solid #72f5ed66;border-color:var(--cyan)}.actions{display:flex;gap:9px;flex-wrap:wrap;margin-top:14px}.list{display:grid;gap:10px;margin-top:14px}.item{padding:13px;border:1px solid #ffffff1b;border-radius:14px;background:#ffffff06}.item-head{display:flex;align-items:flex-start;justify-content:space-between;gap:10px}.item-title{font-weight:850;overflow-wrap:anywhere}.meta{font-size:11px;color:var(--muted);margin-top:4px}.item-actions{display:flex;gap:7px;flex-wrap:wrap;margin-top:10px}.item-actions .btn{font-size:12px;padding:7px 10px}.empty{padding:20px;text-align:center;border:1px dashed #ffffff32;border-radius:14px;color:var(--muted)}.media-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:11px;margin-top:14px}.media-card{min-width:0;overflow:hidden;border:1px solid #ffffff1c;border-radius:15px;background:#ffffff06}.media-card img,.media-card video{display:block;width:100%;aspect-ratio:16/10;object-fit:cover;background:#090817}.media-card audio{display:block;width:calc(100% - 20px);margin:14px 10px}.media-copy{padding:10px 12px}.media-copy strong{display:block;overflow-wrap:anywhere}.note{margin-top:15px;padding:12px;border:1px solid #72f5ed28;border-radius:12px;background:#72f5ed08;color:var(--muted);font-size:12px}.footer{margin-top:24px;text-align:center;color:var(--muted);font-size:11px}
+@media(max-width:760px){.grid{grid-template-columns:1fr}.media-grid{grid-template-columns:1fr 1fr}}@media(max-width:420px){.shell{padding:12px 11px 44px}.panel{padding:14px}.media-grid{grid-template-columns:1fr}.item-head{display:block}}
+</style>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body>
+<main class="shell">
+<header class="top"><div class="brand">Tik<span>Nation</span> · Creator Workspace</div><div class="actions" style="margin:0"><a class="btn" href="../next/index.html#home">← TikNation</a><a class="btn" href="./creator-analytics.html">Analytics ↗</a></div></header>
+<section class="hero"><div class="eyebrow">YOUR CREATIVE CONTROL ROOM</div><h1>Creator Workspace ✦</h1><p class="muted">Keep your ideas organized and revisit the media you've shared.</p><div id="status" class="status" role="status" aria-live="polite">Checking your TikNation account…</div></section>
+<div class="grid">
+<section class="panel" aria-labelledby="draftHeading">
+<h2 id="draftHeading">Content planner · Drafts</h2><p>Save ideas privately to your TikNation account and return to them later.</p>
+<form id="draftForm">
+<input type="hidden" id="draftId">
+<div class="field"><label for="draftTitle">Title</label><input id="draftTitle" maxlength="80" placeholder="Give your idea a name"></div>
+<div class="field"><label for="draftDescription">Notes</label><textarea id="draftDescription" maxlength="500" placeholder="Write your caption, plan or next steps…"></textarea></div>
+<div class="field"><label for="draftRealm">Creative space</label><select id="draftRealm"><option value="general">General</option><option value="visual">Art &amp; Design</option><option value="music">Music</option><option value="ideas">Ideas &amp; Tech</option></select></div>
+<div class="actions"><button class="btn primary" type="submit">Save draft</button><button class="btn" type="button" id="clearDraft">New draft</button></div>
+</form>
+<div class="list" id="draftList"><div class="empty">Your saved drafts will appear here.</div></div>
+<div class="note">Drafts are private to your signed-in account. This planner saves drafts; scheduled automatic publishing is not enabled yet.</div>
+</section>
+<section class="panel" aria-labelledby="mediaHeading">
+<h2 id="mediaHeading">Creator media library</h2><p>Find photos, videos and audio attached to your published creations.</p>
+<div class="actions" style="margin-top:0"><button class="btn" type="button" id="refreshMedia">Refresh library</button><a class="btn" href="../next/index.html#home">Create something ↗</a></div>
+<div class="media-grid" id="mediaGrid"><div class="empty" style="grid-column:1/-1">Your published media will appear here.</div></div>
+<div class="note">This library shows media attached to published TikNation creations. Private draft uploads and device-only files are not included here.</div>
+</section>
+</div>
+<footer class="footer">TikNation · Your voice. Your world.</footer>
+</main>
+<script>
+(()=>{
+const URL="https://mekzfezaefcimxncklfj.supabase.co";
+const KEY="sb_publishable_Cr0ssF3pEz5lE08KwvyacQ_dKC2IUbQ";
+const db=window.supabase?.createClient?window.supabase.createClient(URL,KEY):null;
+const $=id=>document.getElementById(id);
+let user=null,drafts=[];
+const esc=v=>String(v??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+function status(message,error=false){$("status").textContent=message;$("status").classList.toggle("error",error)}
+function clearForm(){$("draftId").value="";$("draftTitle").value="";$("draftDescription").value="";$("draftRealm").value="general"}
+function editDraft(id){const d=drafts.find(x=>x.id===id);if(!d)return;$("draftId").value=d.id;$("draftTitle").value=d.title||"";$("draftDescription").value=d.description||"";$("draftRealm").value=d.creative_realm||"general";$("draftTitle").focus()}
+async function loadDrafts(){const r=await db.from("creator_drafts").select("id,title,description,creative_realm,created_at,updated_at").eq("user_id",user.id).order("updated_at",{ascending:false}).limit(100);if(r.error)throw r.error;drafts=r.data||[];const host=$("draftList");if(!drafts.length){host.innerHTML='<div class="empty">No drafts yet. Save your first idea above.</div>';return}host.innerHTML=drafts.map(d=>'<article class="item"><div class="item-head"><div><div class="item-title">'+esc(d.title||"Untitled draft")+'</div><div class="meta">'+esc(({general:"General",visual:"Art & Design",music:"Music",ideas:"Ideas & Tech"})[d.creative_realm]||"General")+' · Updated '+esc(new Date(d.updated_at||d.created_at).toLocaleString())+'</div></div></div><div class="muted" style="font-size:13px;margin-top:7px;white-space:pre-wrap">'+esc(d.description||"No notes yet.")+'</div><div class="item-actions"><button class="btn" type="button" data-edit="'+esc(d.id)+'">Edit</button><button class="btn" type="button" data-delete="'+esc(d.id)+'">Delete</button></div></article>').join("");host.querySelectorAll("[data-edit]").forEach(b=>b.addEventListener("click",()=>editDraft(b.dataset.edit)));host.querySelectorAll("[data-delete]").forEach(b=>b.addEventListener("click",()=>deleteDraft(b.dataset.delete)))}
+async function deleteDraft(id){if(!confirm("Delete this saved draft?"))return;const r=await db.from("creator_drafts").delete().eq("id",id).eq("user_id",user.id);if(r.error){status("Could not delete draft: "+r.error.message,true);return}if($("draftId").value===id)clearForm();await loadDrafts();status("Draft deleted.")}
+async function saveDraft(e){e.preventDefault();const id=$("draftId").value,title=$("draftTitle").value.trim(),description=$("draftDescription").value.trim(),creative_realm=$("draftRealm").value;if(!title&&!description){status("Add a title or some notes before saving.",true);return}const values={title,description,creative_realm,updated_at:new Date().toISOString()};let r;if(id)r=await db.from("creator_drafts").update(values).eq("id",id).eq("user_id",user.id);else r=await db.from("creator_drafts").insert({...values,user_id:user.id});if(r.error){status("Draft could not be saved: "+r.error.message,true);return}clearForm();await loadDrafts();status("Draft saved to your account.")}
+function safeMediaUrl(value){try{const u=new URL(value);return u.protocol==="https:"?u.href:null}catch{return null}}
+function renderMedia(items){const host=$("mediaGrid");if(!items.length){host.innerHTML='<div class="empty" style="grid-column:1/-1">No published media found yet. Add a photo, video or track to a creation.</div>';return}host.innerHTML=items.map(p=>{const url=safeMediaUrl(p.media_url);if(!url)return "";let media="";if((p.media_type||"").startsWith("video/"))media='<video controls preload="metadata" src="'+esc(url)+'"></video>';else if((p.media_type||"").startsWith("audio/"))media='<audio controls preload="metadata" src="'+esc(url)+'"></audio>';else media='<img loading="lazy" src="'+esc(url)+'" alt="'+esc(p.title||"Published creator media")+'">';return '<article class="media-card">'+media+'<div class="media-copy"><strong>'+esc(p.title||"Untitled creation")+'</strong><div class="meta">'+esc(p.media_type||"Media")+' · '+esc(new Date(p.created_at).toLocaleDateString())+'</div><a href="'+esc(url)+'" target="_blank" rel="noopener noreferrer">Open original media ↗</a></div></article>'}).join("")||'<div class="empty" style="grid-column:1/-1">No viewable media found.</div>'}
+async function loadMedia(){const r=await db.from("creator_posts").select("id,title,media_url,media_type,media_path,created_at").eq("user_id",user.id).eq("status","published").not("media_url","is",null).order("created_at",{ascending:false}).limit(100);if(r.error)throw r.error;renderMedia(r.data||[])}
+async function init(){if(!db){status("TikNation services could not be reached. Refresh and try again.",true);return}const r=await db.auth.getSession();user=r.data.session?.user;if(!user){status("Sign in to use your private Creator Workspace.",true);$("draftList").innerHTML='<div class="empty"><a href="../next/index.html#profile">Sign in to TikNation</a>, then return here.</div>';return}status("Loading your private drafts and published media…");await Promise.all([loadDrafts(),loadMedia()]);status("Your Creator Workspace is ready.")}
+$("draftForm").addEventListener("submit",saveDraft);$("clearDraft").addEventListener("click",()=>{clearForm();status("Ready for a new draft.")});$("refreshMedia").addEventListener("click",()=>loadMedia().then(()=>status("Media library refreshed.")).catch(e=>status("Media library could not load: "+e.message,true)));
+init().catch(e=>status("Workspace could not load: "+e.message,true));
+})();
+</script>
+</body>
+</html>
