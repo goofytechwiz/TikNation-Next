@@ -521,7 +521,40 @@ button:hover,.action:hover,.pill:hover,.quick-card:hover{filter:brightness(1.12)
 </style>
 <style id="tn-world-hubs-css">
 .tn-world-view{padding-bottom:42px}.tn-world-banner{display:flex;align-items:center;gap:22px;padding:clamp(22px,4vw,38px);margin:18px 0;border:1px solid #8c77ff55;border-radius:24px;background:radial-gradient(circle at 15% 30%,#9b62ff44,transparent 42%),linear-gradient(120deg,#15152e,#102c42 65%,#21183d);box-shadow:0 16px 55px #0005;overflow:hidden;position:relative}.tn-world-banner>span{font-size:clamp(48px,8vw,82px);width:100px;flex:none;text-align:center;color:#d7b8ff;text-shadow:0 0 28px #a66dff}.tn-world-banner small{letter-spacing:.18em;color:#a8f7f0;font-weight:800}.tn-world-banner h3{font-size:clamp(22px,3vw,34px);margin:8px 0}.tn-world-banner p{margin:0;color:#c9d5e8;max-width:650px;line-height:1.6}.tn-art-banner{background:radial-gradient(circle at 15% 30%,#e66acb55,transparent 42%),linear-gradient(120deg,#281535,#152b45)}.tn-music-banner{background:radial-gradient(circle at 15% 30%,#4a9dff55,transparent 42%),linear-gradient(120deg,#101c3c,#241742)}.tn-ideas-banner{background:radial-gradient(circle at 15% 30%,#50e6bd44,transparent 42%),linear-gradient(120deg,#102d32,#171c3b)}.tn-community-banner{background:radial-gradient(circle at 15% 30%,#ffc66a44,transparent 42%),linear-gradient(120deg,#302039,#132b3c)}.tn-world-actions{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin:16px 0 28px}.tn-world-columns{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin:20px 0 34px}.tn-world-panel{padding:22px;border-radius:20px;border:1px solid #8e9bc533;background:linear-gradient(145deg,#171b32dd,#101d2bdd);min-height:155px}.tn-world-panel>span{font-size:28px}.tn-world-panel h3{margin:12px 0 7px}.tn-world-panel p{color:var(--muted,#aebbd0);line-height:1.55;margin:0}@media(max-width:700px){.tn-world-banner{align-items:flex-start;gap:12px;padding:20px}.tn-world-banner>span{width:52px;font-size:48px}.tn-world-columns{grid-template-columns:1fr}.tn-world-panel{min-height:0}}
-</style></head>
+</style><style id="tn-living-controls-v1">
+/* Dimensional, luminous and tactile controls across TikNation */
+:root{--tn-depth-shadow:0 7px 0 rgba(5,4,20,.58),0 13px 25px rgba(0,0,0,.34),inset 0 1px 0 rgba(255,255,255,.24)}
+button,.btn,.button,.navbtn,.nav-item,.tn-world-card,.home-interest,.quick-card,.discover-chip,[role="button"],a.button,a.btn{
+ position:relative;isolation:isolate;transform:translateY(0);border:1px solid rgba(255,255,255,.2);
+ box-shadow:var(--tn-depth-shadow);transition:transform .18s cubic-bezier(.2,.8,.2,1),box-shadow .18s ease,filter .18s ease,border-color .18s ease;
+ -webkit-tap-highlight-color:transparent
+}
+button:not(:disabled),.btn,.button,.navbtn,.nav-item,.tn-world-card,.home-interest,.quick-card,.discover-chip,[role="button"],a.button,a.btn{cursor:pointer}
+button::before,.btn::before,.button::before,.navbtn::before,.nav-item::before,.tn-world-card::before,.home-interest::before,.quick-card::before,.discover-chip::before,[role="button"]::before,a.button::before,a.btn::before{
+ content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;z-index:-1;
+ background:linear-gradient(145deg,rgba(255,255,255,.2),transparent 43%,rgba(0,0,0,.13));opacity:.8;transition:opacity .18s ease
+}
+button:hover:not(:disabled),.btn:hover,.button:hover,.navbtn:hover,.nav-item:hover,.tn-world-card:hover,.home-interest:hover,.quick-card:hover,.discover-chip:hover,[role="button"]:hover,a.button:hover,a.btn:hover{
+ transform:translateY(-3px) scale(1.015);box-shadow:0 10px 0 rgba(5,4,20,.48),0 18px 32px rgba(0,0,0,.4),0 0 21px rgba(114,245,237,.2),inset 0 1px 0 rgba(255,255,255,.32);
+ border-color:rgba(114,245,237,.68);filter:saturate(1.17) brightness(1.08)
+}
+button:active:not(:disabled),.btn:active,.button:active,.navbtn:active,.nav-item:active,.tn-world-card:active,.home-interest:active,.quick-card:active,.discover-chip:active,[role="button"]:active,a.button:active,a.btn:active{
+ transform:translateY(3px) scale(.975);box-shadow:0 2px 0 rgba(5,4,20,.58),0 4px 10px rgba(0,0,0,.28),inset 0 2px 7px rgba(0,0,0,.22);filter:saturate(1.25) brightness(1.1)
+}
+button:focus-visible,.btn:focus-visible,.button:focus-visible,.navbtn:focus-visible,.nav-item:focus-visible,.tn-world-card:focus-visible,.home-interest:focus-visible,.quick-card:focus-visible,.discover-chip:focus-visible,[role="button"]:focus-visible,a.button:focus-visible,a.btn:focus-visible{
+ outline:2px solid var(--cyan);outline-offset:4px;box-shadow:0 0 0 5px rgba(114,245,237,.17),var(--tn-depth-shadow)
+}
+button:disabled{opacity:.55;cursor:not-allowed;filter:saturate(.55)}
+.tn-world-card,.home-interest{border-color:rgba(165,138,255,.42)}
+.navbtn,.nav-item,.discover-chip{backdrop-filter:blur(12px)}
+.tn-main-nav .navbtn.active,.navbtn.active,.nav-item.active,.discover-chip.active,.discover-chip[aria-pressed="true"]{
+ border-color:rgba(114,245,237,.8)!important;box-shadow:0 5px 0 rgba(5,4,20,.5),0 0 22px rgba(114,245,237,.25),inset 0 1px 0 rgba(255,255,255,.3)!important
+}
+.tn-main-nav .tn-nav-create{box-shadow:0 8px 0 rgba(5,4,20,.45),0 12px 28px rgba(165,138,255,.34),inset 0 1px 0 rgba(255,255,255,.5)!important}
+@media(hover:none){button:hover:not(:disabled),.btn:hover,.button:hover,.navbtn:hover,.nav-item:hover,.tn-world-card:hover,.home-interest:hover,.quick-card:hover,.discover-chip:hover,[role="button"]:hover,a.button:hover,a.btn:hover{transform:none;filter:none}}
+@media(prefers-reduced-motion:reduce){button,.btn,.button,.navbtn,.nav-item,.tn-world-card,.home-interest,.quick-card,.discover-chip,[role="button"],a.button,a.btn,button::before,.btn::before,.button::before,.navbtn::before,.nav-item::before,.tn-world-card::before,.home-interest::before,.quick-card::before,.discover-chip::before{transition:none!important;animation:none!important}}
+</style>
+</head>
 <body><div class="shell">
 <header class="top"><div class="brand"><div class="brandmark">✦</div><div>TikNation<small>YOUR VOICE. YOUR WORLD.</small></div></div><div class="top-actions"><button class="pill tn-utility" aria-label="Messages" title="Messages" onclick="navigate('messages')"><span class="tn-icon" aria-hidden="true">📬</span><span class="utility-label">Messages</span></button><button class="pill tn-utility" aria-label="Notifications" title="Notifications" onclick="navigate('notifications')"><span class="tn-icon" aria-hidden="true">🔔</span><span class="utility-label">Notifications</span></button><button id="tnProfileButton" class="pill tn-account tn-profile-button" aria-label="Profile" title="Profile" onclick="navigate('profile')"><img id="tnProfileImage" class="tn-profile-image" alt="" hidden><span id="tnProfileFallback" class="tn-profile-fallback" aria-hidden="true">◉</span></button><button class="pill tn-account" aria-label="Settings" title="Settings" onclick="navigate('settings')"><span class="tn-icon" aria-hidden="true">⚙</span><span class="utility-label">Settings</span></button><button class="action primary" onclick="navigate('create')">✧ Create</button></div></header>
 <nav class="mobilebar tn-main-nav" aria-label="TikNation main navigation"><button class="navbtn active" data-view="home" onclick="navigate('home')"><span class="tn-icon" aria-hidden="true">⌂</span><b>Home</b></button><button class="navbtn" data-view="discover" onclick="navigate('discover')"><span class="tn-icon" aria-hidden="true">⌕</span><b>Discover</b></button><a class="navbtn" href="./live-worlds.html"><span class="tn-live-mark" aria-hidden="true">●</span><b>LIVE</b></a><a class="navbtn tn-nav-create" href="#create" onclick="navigate('create');return false;"><span class="tn-icon" aria-hidden="true">✧</span><b>Create</b></a><button class="navbtn" data-view="community" onclick="navigate('community')"><span class="tn-icon" aria-hidden="true">◎</span><b>Community</b></button></nav>
