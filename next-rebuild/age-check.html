@@ -54,7 +54,7 @@ async function boot(){
     const result=await send("status");
     if(result.age_check_complete){
       $("ageForm").hidden=true;
-      showStatus("Your TikNation age check is already complete. You can return to LIVE. Broadcasting still requires age 18+, a verified email, a complete profile, good account standing, and creator approval during beta.","ok");
+      showStatus("Your TikNation age check is already complete. You can return to LIVE. Broadcasting, guest stages, and LIVE Battles require age 18+, a verified email, a complete profile, good account standing, creator approval during beta, and an account at least 7 days old.","ok");
     }else{
       $("ageForm").hidden=false;
       $("dob").max=new Date().toISOString().slice(0,10);
@@ -69,7 +69,7 @@ $("ageForm").addEventListener("submit",async event=>{
     const result=await send("submit",{date_of_birth:$("dob").value});
     if(result.age_check_complete){
       $("ageForm").hidden=true;
-      showStatus("Age check complete. Members aged 13+ can watch eligible LIVE broadcasts. Broadcasting, guest stages, and LIVE Battles require age 18+ and the other creator requirements.","ok");
+      showStatus("Age check complete. Members aged 13+ can watch eligible LIVE broadcasts. Broadcasting, guest stages, and LIVE Battles require age 18+, an account at least 7 days old, and the other creator requirements.","ok");
     }else showStatus("Your age check could not be confirmed. Please try again.","error");
   }catch(error){showStatus(error.message||"The age check could not be completed.","error");}
   finally{button.disabled=false;}
