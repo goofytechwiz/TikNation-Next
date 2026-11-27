@@ -125,3 +125,32 @@ Treat the remaining work as a product-wide completion effort. Preserve existing 
 - The follow-request response RPC now emits a notification to the requester when their request is accepted; the existing push trigger queues delivery when a device is registered.
 - Hardened the follow-status and follow-request response SECURITY DEFINER functions with an empty search path and fully qualified object references.
 - These changes passed the database migration runner. End-to-end notification display and physical push delivery still require signed-in device testing.
+
+
+## Active TikNation-Next completion pass (2026-11-27)
+
+The current active site being developed is the **next/** app in the **goofytechwiz/TikNation-Next** repository. The older next-rebuild audit content above is historical context and should not be mistaken for proof that every feature in the newer app is already connected.
+
+### Implemented in this pass
+
+- Added a **Creator Workspace** at next-rebuild/creator-workspace.html. Signed-in creators can create, edit, and delete account-owned drafts using the existing creator_drafts table and RLS. The media library reads the signed-in creator's published post media from creator_posts.
+- Added direct links to **Creator Workspace** and the existing **Creator Analytics** from the active Creation Portal.
+- Added a **Creator Showcase** at next-rebuild/creator-showcase.html, with shareable username URLs, published creations, current follower/like counts, and milestone badges calculated from available published-post activity. Views, watch time, reach, and demographics are not fabricated or claimed.
+- Added **Community Groups & Events** at next-rebuild/community-hub.html. New Supabase tables store groups, memberships, events, and RSVPs. RLS policies protect group/event visibility; SECURITY DEFINER RPCs validate group creation, joining, private-group approval, event creation, and RSVP. Private group owners can share invite links; private join requests remain pending until an owner/admin approves them.
+- Connected the active Community view to the Groups & Events hub.
+- Connected the active Notifications view to recipient-scoped rows in notifications, including unread counts, refresh, and mark-read actions.
+- Connected the active Messages view to direct_messages, using the existing participant-only read policy, recipient message-preference checks, and block checks. The inbox supports username search, conversation display, and text sending.
+- Tightened execution grants for the new community RPCs so anonymous/public roles cannot call them.
+- GitHub Pages deployment for commit 41dbb8c6ca0c42cc1552ad76f03859a6a31f2223 completed successfully. Later community invite-link code is queued for its own deployment verification.
+
+### Still not complete / not certified
+
+1. **Scheduled publishing:** private drafts work, but automatic scheduled publishing is not active. It needs a trusted server-side scheduler/worker and explicit publish-time validation; a browser timer is not sufficient.
+2. **Group discussions, polls, and challenges:** the new group/event foundation is active in code, but group-specific discussion threads, polls, persistent challenge participation, and collaboration workspaces have not been built.
+3. **LIVE improvements:** do not infer that viewer likes, gift effects, replay, scheduling, or moderation are all certified from the existing LIVE page. Cross-device tests remain required.
+4. **Background push:** the in-app notification inbox is connected. Actual background delivery must still be verified on physical devices and with the deployed push configuration.
+5. **Privacy/security roadmap:** per-post comment permissions, tag approval, hidden-word filters, restricted accounts, export, deletion workflows, passkeys, backup codes, and trusted-device management remain planned until securely implemented end-to-end.
+6. **Device/account QA:** two-account tests are still required for group creation/join/approval, event visibility/RSVP, message privacy, notification delivery, creator drafts/media, and showcase privacy. Static deployment success is not a substitute for those tests.
+7. **Security review:** verify the new database policies/RPC grants and run the repository's full script/link/security checks on the latest commit before calling the overall platform launch-ready.
+
+**Status:** additional working creator, community, messaging, and notification paths have been connected, but TikNation is not fully launch-certified. Keep the remaining items above clearly labelled as planned or awaiting verification.
