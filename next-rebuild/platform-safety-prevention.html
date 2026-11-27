@@ -40,31 +40,36 @@ ul{padding-left:21px}li{margin:7px 0}.notice{padding:14px 16px;border-left:3px s
 <p class="small">Next: verify server-side age decisions, bypass resistance, account recovery behavior, and enforcement on every LIVE entry point.</p>
 <a class="btn" href="age-check.html">Open Age Check ↗</a></article>
 
-<article class="card"><span class="status">PRESENT IN PROJECT</span><h2>2 · Blocking &amp; direct-message boundaries</h2>
+<article class="card"><span class="status">DATABASE HARDENING VERIFIED</span><h2>2 · Protecting account trust state</h2>
+<p>We closed a permissions gap in the profiles table. Ordinary signed-in clients can no longer update account suspension/protection state, the reason for a safety action, the safety-state timestamp, or the account deactivation timestamp.</p>
+<ul><li>Member profile creation and ordinary profile-field updates remain permitted.</li><li>RLS remains enabled and ownership rules remain in place.</li><li>Database privilege checks confirmed sensitive fields are not updateable by the authenticated role.</li><li>A transaction-based profile upsert test passed and was rolled back, leaving account data unchanged.</li></ul>
+<p class="small">Privileged safety workflows retain their server-side access. This closes the direct client-side path; it does not replace a broader authorization and abuse-resistance audit.</p></article>
+
+<article class="card"><span class="status">PRESENT IN PROJECT</span><h2>3 · Blocking &amp; direct-message boundaries</h2>
 <p>The Privacy Center includes account blocking and describes database-level protections for blocked accounts. It also states that the “Who can message me” preference is enforced by database access rules, including block checks.</p>
 <ul><li>Members can manage blocked accounts from the Privacy Center.</li><li>Message permissions include everyone, followers, people followed, or nobody.</li><li>Private-account and follow-request protections are described as database-level controls.</li></ul>
 <p class="small">Next: test both directions, alternate endpoints, existing conversations, guest/live interactions, and attempts to bypass a block.</p>
 <a class="btn" href="privacy-center.html">Open Privacy Center ↗</a></article>
 
-<article class="card"><span class="status partial">PARTIAL / LIMITED</span><h2>3 · Privacy preferences</h2>
+<article class="card"><span class="status partial">PARTIAL / LIMITED</span><h2>4 · Privacy preferences</h2>
 <p>Privacy settings can be saved to an account, but the Privacy Center explicitly warns that several controls are not enforced consistently across every feature.</p>
 <ul><li>Comment audience, tags, downloads, reposts, and remix choices need enforcement coverage.</li><li>Spam-filter preferences are not yet enforced platform-wide.</li><li>Hidden words and restricted-account lists exist, but automated behavior is not yet connected across all surfaces.</li></ul>
 <p class="small">Next: enforce each preference at the database/API boundary and test all relevant surfaces before calling it protective.</p>
 <a class="btn" href="privacy-center.html">Review Privacy Controls ↗</a></article>
 
-<article class="card"><span class="status partial">INTERFACE PRESENT · VERIFY END TO END</span><h2>4 · Reporting &amp; human review</h2>
+<article class="card"><span class="status partial">INTERFACE PRESENT · VERIFY END TO END</span><h2>5 · Reporting &amp; human review</h2>
 <p>The Safety Center contains a private report form and a restricted Founder safety-review interface, including a priority child-safety queue. The page describes human review and proportional action; this source inspection alone does not prove every submission, notification, and review path works reliably.</p>
 <ul><li>Reports are allegations, not proof.</li><li>Child-safety concerns should be prioritized for prompt review.</li><li>Do not upload or link sexual images or videos involving minors.</li><li>Do not rely on a platform report for an emergency; contact emergency services when someone is in immediate danger.</li></ul>
 <p class="small">Next: test report creation, safe evidence handling, queue permissions, audit history, notifications, retention, and appeals.</p>
 <a class="btn" href="safety-center.html#reportForm">Open Safety Report Form ↗</a></article>
 
-<article class="card"><span class="status partial">POLICY &amp; TRAINING PRESENT</span><h2>5 · Moderation &amp; LIVE safety</h2>
+<article class="card"><span class="status partial">POLICY &amp; TRAINING PRESENT</span><h2>6 · Moderation &amp; LIVE safety</h2>
 <p>TikNation has community rules, moderator training, and a LIVE moderation guidance page. Written guidance is not a substitute for tested moderator permissions and working in-stream controls.</p>
 <ul><li>Review moderator access by role and least privilege.</li><li>Test mute, remove, block, report, guest removal, and stream interruption.</li><li>Record moderator actions and provide an appeal route.</li></ul>
 <p class="small">Next: verify each control in a real test session using separate viewer, creator, moderator, and Founder accounts.</p>
 <div class="links"><a class="btn" href="live-moderation.html">LIVE Moderation ↗</a><a class="btn" href="moderator-training.html">Moderator Training ↗</a></div></article>
 
-<article class="card"><span class="status partial">AVAILABLE · VERIFY COVERAGE</span><h2>6 · Account security</h2>
+<article class="card"><span class="status partial">AVAILABLE · VERIFY COVERAGE</span><h2>7 · Account security</h2>
 <p>The project links to two-step verification, session activity, account recovery, and security tools. Their presence does not establish that every account is enrolled or that all security flows are complete.</p>
 <ul><li>Encourage two-step verification, especially for privileged accounts.</li><li>Review sessions and revoke unfamiliar sessions.</li><li>Protect Founder and moderator roles with strong authentication.</li><li>Test recovery without weakening account protections.</li></ul>
 <div class="links"><a class="btn" href="security.html">Security Settings ↗</a><a class="btn" href="session-activity.html">Session Activity ↗</a></div></article>
