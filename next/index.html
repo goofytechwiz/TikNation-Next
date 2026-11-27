@@ -554,6 +554,15 @@ button:disabled{opacity:.55;cursor:not-allowed;filter:saturate(.55)}
 @media(hover:none){button:hover:not(:disabled),.btn:hover,.button:hover,.navbtn:hover,.nav-item:hover,.tn-world-card:hover,.home-interest:hover,.quick-card:hover,.discover-chip:hover,[role="button"]:hover,a.button:hover,a.btn:hover{transform:none;filter:none}}
 @media(prefers-reduced-motion:reduce){button,.btn,.button,.navbtn,.nav-item,.tn-world-card,.home-interest,.quick-card,.discover-chip,[role="button"],a.button,a.btn,button::before,.btn::before,.button::before,.navbtn::before,.nav-item::before,.tn-world-card::before,.home-interest::before,.quick-card::before,.discover-chip::before{transition:none!important;animation:none!important}}
 </style>
+
+<style>
+#view-settings .settings-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;background:transparent;border:0;padding:0;margin:18px 0}
+#view-settings .settings-group{min-width:0;padding:20px;border:1px solid #a58aff38;border-radius:20px;background:linear-gradient(145deg,#17233aee,#201438ee);box-shadow:0 14px 36px #0004}
+#view-settings .settings-group h3{margin:0 0 8px;font-size:18px;color:#e9e4ff}
+#view-settings .settings-group .action{display:inline-flex;align-items:center;justify-content:center;margin:10px 8px 0 0;text-decoration:none;min-height:42px}
+#view-settings .settings-group .settings-row{padding:14px 0}
+@media(max-width:650px){#view-settings .settings-list{grid-template-columns:1fr}#view-settings .settings-group{padding:17px}}
+</style>
 </head>
 <body><div class="shell">
 <header class="top"><div class="brand"><div class="brandmark">✦</div><div>TikNation<small>YOUR VOICE. YOUR WORLD.</small></div></div><div class="top-actions"><button class="pill tn-utility" aria-label="Messages" title="Messages" onclick="navigate('messages')"><span class="tn-icon" aria-hidden="true">📬</span><span class="utility-label">Messages</span></button><button class="pill tn-utility" aria-label="Notifications" title="Notifications" onclick="navigate('notifications')"><span class="tn-icon" aria-hidden="true">🔔</span><span class="utility-label">Notifications</span></button><button id="tnProfileButton" class="pill tn-account tn-profile-button" aria-label="Profile" title="Profile" onclick="navigate('profile')"><img id="tnProfileImage" class="tn-profile-image" alt="" hidden><span id="tnProfileFallback" class="tn-profile-fallback" aria-hidden="true">◉</span></button><button class="pill tn-account" aria-label="Settings" title="Settings" onclick="navigate('settings')"><span class="tn-icon" aria-hidden="true">⚙</span><span class="utility-label">Settings</span></button><button class="action primary" onclick="navigate('create')">✧ Create</button></div></header>
@@ -673,7 +682,31 @@ button:disabled{opacity:.55;cursor:not-allowed;filter:saturate(.55)}
   </div>
   <section class="home-section"><div class="section-head"><div><div class="eyebrow">YOUR RECENT CREATIONS</div><h2>My creations</h2></div></div><div id="posts" class="feed-list"><div class="empty">Your published creations will appear here.</div></div></section>
 </section>
-<section class="view" id="view-settings"><div class="section-head"><div><div class="eyebrow">MAKE TIKNATION YOURS</div><h2>Settings</h2><p class="muted">Manage your local app preferences and account access.</p></div></div><div class="settings-list"><div class="settings-row"><div><b>Reduce motion</b><small>Limit animated effects on this device.</small></div><label class="switch"><input id="prefReduceMotion" type="checkbox" onchange="saveTikPreference('reduceMotion',this.checked)"><span></span></label></div><div class="settings-row"><div><b>Sound effects</b><small>Allow interface sound effects when available.</small></div><label class="switch"><input id="prefSound" type="checkbox" onchange="saveTikPreference('sound',this.checked)"><span></span></label></div><div class="settings-row"><div><b>Show creator directory</b><small>Keep the feature directory visible on Home.</small></div><label class="switch"><input id="prefDirectory" type="checkbox" checked onchange="saveTikPreference('directory',this.checked)"><span></span></label></div></div><div class="settings-account"><h3>Account</h3><p class="muted" id="settingsAccountState">You are viewing TikNation as a guest.</p><button class="action" onclick="navigate('profile')">View profile</button> <button class="action" onclick="openTikAuth()">Sign in / Create account</button> <button class="action" id="settingsSignOut" onclick="tikSignOut()" hidden>Sign out</button></div><p class="account-note">These preference switches are saved on this device only. They do not change account privacy, notifications, or server-side settings.</p></section>
+<section class="view" id="view-settings">
+<div class="section-head"><div><div class="eyebrow">MAKE TIKNATION YOURS</div><h2>Settings &amp; Control Center</h2><p class="muted">Your account, your experience, your boundaries.</p></div></div>
+<div class="settings-list">
+<div class="settings-group"><h3>Appearance &amp; accessibility</h3>
+<div class="settings-row"><div><b>Reduce motion</b><small>Limit animated effects on this device.</small></div><label class="switch"><input id="prefReduceMotion" type="checkbox" onchange="saveTikPreference('reduceMotion',this.checked)"><span></span></label></div>
+<div class="settings-row"><div><b>Sound effects</b><small>Allow interface sound effects when available.</small></div><label class="switch"><input id="prefSound" type="checkbox" onchange="saveTikPreference('sound',this.checked)"><span></span></label></div>
+<div class="settings-row"><div><b>Show creator directory</b><small>Keep the feature directory visible on Home.</small></div><label class="switch"><input id="prefDirectory" type="checkbox" checked onchange="saveTikPreference('directory',this.checked)"><span></span></label></div>
+<a class="action" href="../next-rebuild/content-preferences.html">Content preferences ↗</a>
+</div>
+<div class="settings-group"><h3>Privacy &amp; security</h3><p class="muted">Choose who can find you, interact with you, and access your account.</p>
+<a class="action primary" href="../next-rebuild/privacy-center.html">Open Privacy Center ↗</a>
+<a class="action" href="../next-rebuild/security.html">Account security &amp; two-step verification ↗</a>
+<a class="action" href="../next-rebuild/session-activity.html">Session activity &amp; devices ↗</a>
+</div>
+<div class="settings-group"><h3>Notifications</h3><p class="muted">Choose which updates and alerts reach you.</p>
+<a class="action" href="../next-rebuild/notification-preferences.html">Notification preferences ↗</a>
+</div>
+<div class="settings-group"><h3>Help &amp; safety</h3><p class="muted">Find safety resources, community rules and support.</p>
+<a class="action" href="../next-rebuild/safety-center.html">Safety Center ↗</a>
+<a class="action" href="../next-rebuild/community-guidelines.html">Community guidelines ↗</a>
+</div>
+</div>
+<div class="settings-account"><h3>Account</h3><p class="muted" id="settingsAccountState">You are viewing TikNation as a guest.</p><button class="action" onclick="navigate('profile')">View profile</button> <button class="action" onclick="openTikAuth()">Sign in / Create account</button> <button class="action" id="settingsSignOut" onclick="tikSignOut()" hidden>Sign out</button></div>
+<p class="account-note">Some preferences are saved on this device. Privacy, security and notification controls open their dedicated TikNation settings pages.</p>
+</section>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2">function filterDirectory(query){const q=(query||"").trim().toLowerCase();const cards=[...document.querySelectorAll("#appDirectory .directory-card")];let shown=0;cards.forEach(card=>{const match=!q||((card.dataset.search||"")+" "+card.textContent).toLowerCase().includes(q);card.hidden=!match;if(match)shown++;});document.querySelectorAll("#appDirectory .directory-group").forEach(group=>{group.hidden=!group.querySelector(".directory-card:not([hidden])");});const empty=document.getElementById("directoryEmpty");if(empty)empty.hidden=shown!==0;}</script><script>
 
 const TIK_SUPABASE_URL="https://mekzfezaefcimxncklfj.supabase.co";
