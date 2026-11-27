@@ -154,3 +154,13 @@ The current active site being developed is the **next/** app in the **goofytechw
 7. **Security review:** verify the new database policies/RPC grants and run the repository's full script/link/security checks on the latest commit before calling the overall platform launch-ready.
 
 **Status:** additional working creator, community, messaging, and notification paths have been connected, but TikNation is not fully launch-certified. Keep the remaining items above clearly labelled as planned or awaiting verification.
+
+
+## Privacy Center expansion (2026-11-27)
+
+- Expanded the Privacy Center with account visibility, interaction permissions, content-sharing preferences, a guided Privacy Checkup, and management panels for hidden words and restricted accounts.
+- Added account-owned fields to `tiknation_privacy_settings` for follower-list visibility, comment/tag audience, tag approval preference, downloads, reposts, and remix permission.
+- Added `tiknation_hidden_words` and `tiknation_restricted_accounts` with RLS enabled, authenticated-only table grants, and owner-scoped policies. No anonymous access is granted.
+- The existing account's blocked-user manager remains available.
+- Important enforcement boundary: the new preferences and lists are saved and manageable, but hidden-word filtering, restricted-account behavior, comment/tag audience enforcement, and content download/repost/remix enforcement still require integration into every relevant feature endpoint. The UI explicitly discloses this rather than claiming protection that is not yet enforced.
+- Data export and permanent deletion remain unimplemented; no fake request buttons were added. A safe server-side export/deletion workflow and retention policy are still required.
