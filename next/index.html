@@ -598,13 +598,19 @@ button:disabled{opacity:.55;cursor:not-allowed;filter:saturate(.55)}
 </style>
 
 <style id="settings-appearance-tiles">
-#view-settings .settings-group:first-child h3{display:flex;align-items:center;gap:10px;padding:13px 16px;margin:-2px 0 14px;border:1px solid #8debf066;border-radius:15px;background:linear-gradient(105deg,#14516a,#44347e,#642d68);box-shadow:0 8px 22px #0004;color:#fff}
-#view-settings .settings-group:first-child h3:before{content:"✧";font-size:20px;color:#a6fff5}
-#view-settings .settings-group:first-child .settings-row{min-height:82px;padding:15px 16px;border:1px solid #8f83ff55;border-radius:16px;background:linear-gradient(120deg,#182c46,#282044);box-shadow:0 8px 20px #0004}
-#view-settings .settings-group:first-child .settings-row:focus-within{outline:2px solid #82f4ed;outline-offset:2px}
-#view-settings .settings-group:first-child .settings-row b{font-size:15px}
-#view-settings .settings-group:first-child .switch{padding:3px;border-radius:99px}
-#view-settings .settings-group:first-child>a.action{margin-top:12px}
+/* Target the Appearance card by its real ID, not a positional selector. */
+#view-settings #settings-appearance{grid-column:1/-1;padding:22px;border:1px solid #73f5ed99;border-radius:24px;background:radial-gradient(ellipse at 0% 0%,#42e6df25,transparent 42%),radial-gradient(ellipse at 100% 100%,#d45bff22,transparent 48%),linear-gradient(125deg,#102e49 0%,#26204e 56%,#421d4b 100%);box-shadow:0 18px 48px #0007,0 0 28px #54e9df18,inset 0 1px #ffffff24}
+#view-settings #settings-appearance .settings-group-kicker{display:inline-flex;padding:7px 11px;border:1px solid #79eee766;border-radius:999px;background:#0b263e99;color:#a8fff7;font-size:10px;font-weight:850;letter-spacing:1.8px}
+#view-settings #settings-appearance h3{display:flex;align-items:center;gap:10px;padding:14px 17px;margin:12px 0;border:1px solid #9a8cff88;border-radius:16px;background:linear-gradient(105deg,#14516a,#44347e,#642d68);box-shadow:0 9px 24px #0005;color:#fff;font-size:21px}
+#view-settings #settings-appearance h3:before{content:"✧";font-size:22px;color:#a6fff5}
+#view-settings #settings-appearance .settings-group-description{margin:0 0 16px;color:#d6d7f0}
+#view-settings #settings-appearance .settings-row{display:flex;align-items:center;justify-content:space-between;gap:14px;width:100%;min-height:84px;padding:16px 18px;margin:12px 0;border:1px solid #a99aff77;border-radius:17px;background:linear-gradient(110deg,#173650,#282044);box-shadow:0 9px 22px #0005,inset 0 1px #ffffff12;cursor:pointer}
+#view-settings #settings-appearance .settings-row b{display:block;color:#fff;font-size:16px}
+#view-settings #settings-appearance .settings-row small{display:block;margin-top:5px;color:#d0cde8;line-height:1.45}
+#view-settings #settings-appearance .settings-row:focus-within{outline:2px solid #82f4ed;outline-offset:3px}
+#view-settings #settings-appearance .switch{padding:4px;border-radius:99px;box-shadow:0 0 0 1px #9e8cff55}
+#view-settings #settings-appearance>a.action{margin-top:12px}
+@media(max-width:650px){#view-settings #settings-appearance{padding:17px}#view-settings #settings-appearance .settings-row{min-height:78px;padding:13px}}
 </style>
 </head>
 <body><div class="shell">
