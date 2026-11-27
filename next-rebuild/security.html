@@ -27,6 +27,13 @@ main{max-width:760px;margin:30px auto}.brand{color:var(--cyan);font-weight:800;l
 <div class="row"><button class="btn" id="verifyEnroll">Verify and enable</button><button class="btn secondary" id="cancelEnroll">Cancel</button></div>
 <div id="enrollError" class="error"></div>
 </section>
+<section class="card"><h2>More account protection</h2><p class="muted">We are expanding account security carefully. These protections must be connected to verified server-side authentication before they can be switched on.</p>
+<div class="factor"><span><b>New sign-in alerts</b><br><small class="muted">Notify you when a new device or browser signs in.</small></span><span class="muted">Planned</span></div>
+<div class="factor"><span><b>Passkeys</b><br><small class="muted">Sign in with a device passkey where supported.</small></span><span class="muted">Planned</span></div>
+<div class="factor"><span><b>Backup recovery codes</b><br><small class="muted">Keep a safe recovery route if you lose access to your authenticator.</small></span><span class="muted">Planned</span></div>
+<div class="factor"><span><b>Trusted devices</b><br><small class="muted">Review and revoke individual remembered devices.</small></span><span class="muted">Not available yet</span></div>
+<p class="muted">For now, use authenticator-based two-step verification and the <a href="session-activity.html">Session Activity</a> page to review or sign out of the current session or all sessions.</p>
+</section>
 <div id="pageStatus" class="status" role="status" aria-live="polite"></div>
 </main>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.119.2"></script>
